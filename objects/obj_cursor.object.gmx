@@ -69,14 +69,18 @@ else{
 if(mouse_check_button_pressed(mb_left)){
     if(hoverNode.occupant != noone){
         selectedActor = hoverNode.occupant;
+        selectedActor.actions=2;
+        movement_range(hoverNode,selectedActor.move, selectedActor.actions);
+        
     }
     else{
     selectedActor = noone;
+    wipe_nodes();
     }
 }
 
 if(mouse_check_button_pressed(mb_right)){
-    if(selectedActor != noone &amp;&amp; hoverNode.occupant == noone &amp;&amp; hoverNode.passable){
+    if(selectedActor != noone &amp;&amp; hoverNode.moveNode){
         //First clear the node of selected actor
         map[selectedActor.gridX, selectedActor.gridY].occupant = noone;
     //Update selected actor's position and information
@@ -88,11 +92,27 @@ if(mouse_check_button_pressed(mb_right)){
     
     //Update new node's occupant status
     hoverNode.occupant = selectedActor;
+    //if selectedActor performed "double move" deselect 
+    //otherwise decrement actions and reselect
+    if(hoverNode.G&gt;selectedActor.move){
+    selectedActor=noone;
+    wipe_nodes();
+    }else{
+    selectedActions=-1;
+    if(selectionActors.actions&gt;0)
+    {
+    //reperform movement_range
+    movement_range(hoverNode, selectedActor.move, selectedActor.actions);
+    }else{
+    selectedActor=noone;
+    wipe_nodes();
+    }
     
+    }
     }
     else{
         SelectedActor = noone;
-        
+       wipe_nodes(); 
     }
 }
 </string>
