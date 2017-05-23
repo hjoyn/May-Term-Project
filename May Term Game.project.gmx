@@ -8,8 +8,9 @@
   <sprites name="sprites">
     <sprite>sprites\spr_Node</sprite>
     <sprite>sprites\spr_selected</sprite>
-    <sprite>sprites\spr_hero</sprite>
+    <sprite>sprites\spr_Stell</sprite>
     <sprite>sprites\spr_wall</sprite>
+    <sprite>sprites\spr_tree</sprite>
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
@@ -18,13 +19,16 @@
     <object>objects\obj_control</object>
     <object>objects\obj_cursor</object>
     <object>objects\obj_actor</object>
-    <object>objects\obj_hero</object>
+    <object>objects\obj_Stell</object>
+    <object>objects\obj_terrain</object>
+    <object>objects\obj_wall</object>
+    <object>objects\obj_treeSpace</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\room0</room>
   </rooms>
   <constants number="1">
-    <constant name="GRID_SIZE">32</constant>
+    <constant name="GRID_SIZE">64</constant>
   </constants>
   <help>
     <rtf>help.rtf</rtf>

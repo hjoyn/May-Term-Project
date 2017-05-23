@@ -140,6 +140,18 @@ if(hoverNode != noone){
     draw_set_color(c_white);
     draw_text(0, 0, tempText);
     
+    tempText = hoverNode.type;
+    
+    if(hoverNode.passable){
+        tempText += " passable = true" + " cost = " + string(hoverNode.cost);
+    }
+    
+    draw_set_color(c_black);
+    draw_rectangle(0, 20, string_width(tempText), string_height(tempText) + 20, false);
+    
+    draw_set_color(c_white);
+    draw_text(0, 20, tempText);
+    
 }
 
 if(selectedActor != noone){
