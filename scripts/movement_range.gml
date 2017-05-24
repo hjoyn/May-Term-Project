@@ -29,9 +29,14 @@ while(ds_priority_size(open) > 0){
     //add that node to the closed list
     ds_list_add(closed, current);
     
+
     for(ii=0;ii<ds_list_size(current.neighbors);ii+=1){
    
      //store current neighbor in neighbor variable
+
+    for(ii=0;ii<ds_list_size(start.neighbors);ii+=1){
+    //store current neighbor in neighbor variable
+
     neighbor=ds_list_find_value(current.neighbors, ii);
     
     //add neighbors to open list if it qualifies
@@ -49,7 +54,11 @@ while(ds_priority_size(open) > 0){
         neighbor.parent = current;
         
         //if node is diagonal, create appropriate costMod
+
         if(neighbor.gridX != current.gridX && neighbor.gridY != current.gridY)
+
+        if(neighbor.gridX!=current.gridX&&neighbor.gridY!=current.gridY)
+
         {
         costMod = 2;
         }     
@@ -63,6 +72,7 @@ while(ds_priority_size(open) > 0){
         //figure out if the neighbor's score would be LOWER if found 
         //from the current node!
         costMod=1;        
+
         
         //If node is diagonal, create apropriate costMod
         if(neighbor.gridX != current.gridX && neighbor.gridY != current.gridY)
@@ -71,6 +81,14 @@ while(ds_priority_size(open) > 0){
         }    
         
         tempG = current.G + (neighbor.cost*costMod);
+
+        }
+        if(neighbor.gridX!=current.gridX&&neighbor.gridY!=current.gridY)
+        {
+        costMod=2;
+        }    
+        tempG=current.G+(neighbor.cost*costMod);
+
         //check if a G score would be lower 
         if(tempG < neighbor.G){
         neighbor.parent = current;
@@ -83,7 +101,12 @@ while(ds_priority_size(open) > 0){
 
     //round down all G scores for movement
      with(obj_Node){
+
      G = floor(G); 
+
+     G=floor(G);
+     
+
     }
     
     //destroy open
@@ -91,7 +114,11 @@ while(ds_priority_size(open) > 0){
     
     //color all nodes then DESTROY the closed list
     
+
     for(ii=0; ii < ds_list_size(closed); ii+=1)
+
+    for(ii=0;ii<ds_list_size(closed);ii+=1)
+
     {
     current=ds_list_find_value(closed,ii);
     current.moveNode=true;

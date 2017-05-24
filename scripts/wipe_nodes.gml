@@ -1,3 +1,4 @@
+
 //Reset data of all nodes
 with(obj_Node){
     moveNode = false;
