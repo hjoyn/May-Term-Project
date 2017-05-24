@@ -61,16 +61,18 @@ gridY = floor(y/GRID_SIZE);
 
 if (gridX &lt; 0 || gridY &lt; 0 || gridX &gt;= room_width/GRID_SIZE || gridY &gt;= room_height/GRID_SIZE){
     hoverNode = noone;
-    }
+}
 else{
     hoverNode = map[gridX, gridY];
 }
 
 if(mouse_check_button_pressed(mb_left)){
     if(hoverNode.occupant != noone){
-        selectedActor = hoverNode.occupant;
-        selectedActor.actions=2;
-        movement_range(hoverNode,selectedActor.move, selectedActor.actions);
+        if(hoverNode.occupant != selectedActor){
+            selectedActor = hoverNode.occupant;
+            selectedActor.actions=2;
+            movement_range(hoverNode,selectedActor.move, selectedActor.actions);
+        }
         
     }
     else{
@@ -81,39 +83,55 @@ if(mouse_check_button_pressed(mb_left)){
 
 if(mouse_check_button_pressed(mb_right)){
     if(selectedActor != noone &amp;&amp; hoverNode.moveNode){
+        current = hoverNode;
         
-        //First clear the node of selected actor
-     map[selectedActor.gridX, selectedActor.gridY].occupant = noone;
+        //Priority queue
+        path = ds_priority_create();
         
-        //Update selected actor's position and information
+        //Add nodes to path 
+        while(current.parent != noone){
+            ds_priority_add(path, current.parent, current.parent.G);
+            
+            current = current.parent;
+        }
+        
+        do{
+            //Take node from queue
+            current = ds_priority_delete_min(path);
+            
+            path_add_point(selectedActor.movementPath, current.x, current.y, 100);
+        }
+        until(ds_priority_empty(path));
+        
+        //Collect queue memory
+        ds_priority_destroy(path);
+        
+        //Clear actor's node
+        map[selectedActor.gridX, selectedActor.gridY].occupant = noone;
+        
+        //Move actor to new node
         selectedActor.gridX = gridX;
         selectedActor.gridY = gridY;
-        selectedActor.x = hoverNode.x;
-        selectedActor.y = hoverNode.y;
-    
-    
-        //Update new node's occupant status
+        
+        //Place actor in target node
         hoverNode.occupant = selectedActor;
         
-        //if selectedActor performed "double move" deselect 
-        //otherwise decrement actions and reselect
+        //Set actor state
+        selectedActor.state = "begin path";
         
+        //Set actions remaining
         if(hoverNode.G &gt; selectedActor.move){
-            selectedActor = noone;
-            wipe_nodes();
+            selectedActor.actions -= 2;
         }
         else{
             selectedActor.actions -= 1;
-    if(selectedActor.actions &gt; 0)
-    {
-    //reperform movement_range
-    movement_range(hoverNode, selectedActor.move, selectedActor.actions);
-    }else{
-    selectedActor=noone;
-    wipe_nodes();
-    }
-    
-    }
+        }
+        
+        //Wipe nodes
+        wipe_nodes();
+        
+        //Clear selected actor
+        selectedActor = noone;
     }
     else{
         SelectedActor = noone;
