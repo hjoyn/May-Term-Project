@@ -1,6 +1,7 @@
-with(Tile)(
-moveNode=false;
-G=0;
-parent=noone;
-color=c_white;
-)
+//Reset data of all nodes
+with(obj_Node){
+    moveNode = false;
+    G = 0;
+    parent = noone;
+    color = c_white;
+}

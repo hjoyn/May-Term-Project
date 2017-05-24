@@ -36,9 +36,9 @@ gridY = 0;
 type = "node";
 
 //pathfinding variable
-parent="noone"
-G=0;
-moveNode=false;
+parent = noone;
+G = 0;
+moveNode = false;
 cost = 1;
 
 
