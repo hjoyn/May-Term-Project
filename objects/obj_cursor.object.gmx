@@ -103,8 +103,8 @@ if(mouse_check_button_pressed(mb_right)){
             wipe_nodes();
         }
         else{
-            selectedActions=-1;
-    if(selectionActors.actions&gt;0)
+            selectedActor.actions -= 1;
+    if(selectedActor.actions &gt; 0)
     {
     //reperform movement_range
     movement_range(hoverNode, selectedActor.move, selectedActor.actions);
