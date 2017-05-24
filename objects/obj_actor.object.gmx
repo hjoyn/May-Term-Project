@@ -106,6 +106,7 @@ if(actions &gt; 0){
     obj_cursor.selectedActor = id;
     movement_range(map[gridX, gridY], move, actions);
 }
+
 </string>
           </argument>
         </arguments>

@@ -89,6 +89,7 @@ if(mouse_check_button_pressed(mb_right)){
         path = ds_priority_create();
         
         //Add nodes to path 
+        ds_priority_add(path, current, current.G);
         while(current.parent != noone){
             ds_priority_add(path, current.parent, current.parent.G);
             
