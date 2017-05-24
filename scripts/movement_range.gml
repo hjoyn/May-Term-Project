@@ -34,8 +34,7 @@ while(ds_priority_size(open) > 0){
    
      //store current neighbor in neighbor variable
 
-    for(ii=0;ii<ds_list_size(start.neighbors);ii+=1){
-    //store current neighbor in neighbor variable
+
 
     neighbor=ds_list_find_value(current.neighbors, ii);
     
@@ -137,4 +136,4 @@ while(ds_priority_size(open) > 0){
 
 
 
-} 
+ 
