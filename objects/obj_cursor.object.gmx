@@ -66,21 +66,6 @@ else{
     hoverNode = map[gridX, gridY];
 }
 
-if(mouse_check_button_pressed(mb_left)){
-    if(hoverNode.occupant != noone){
-        if(hoverNode.occupant != selectedActor){
-            selectedActor = hoverNode.occupant;
-            selectedActor.actions=2;
-            movement_range(hoverNode,selectedActor.move, selectedActor.actions);
-        }
-        
-    }
-    else{
-    selectedActor = noone;
-    wipe_nodes();
-    }
-}
-
 if(mouse_check_button_pressed(mb_right)){
     if(selectedActor != noone &amp;&amp; hoverNode.moveNode){
         current = hoverNode;
@@ -123,21 +108,20 @@ if(mouse_check_button_pressed(mb_right)){
         //Set actions remaining
         if(hoverNode.G &gt; selectedActor.move){
             selectedActor.actions -= 2;
+            wipe_nodes(); //might delete
         }
         else{
             selectedActor.actions -= 1;
+            wipe_nodes(); //might delete
         }
         
         //Wipe nodes
-        wipe_nodes();
+       // wipe_nodes();
         
         //Clear selected actor
         selectedActor = noone;
     }
-    else{
-        SelectedActor = noone;
-       wipe_nodes(); 
-    }
+ 
 }
 </string>
           </argument>

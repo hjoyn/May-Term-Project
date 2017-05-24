@@ -27,7 +27,8 @@
             <kind>1</kind>
             <string>state = "idle" 
 
-
+initiative = 0;
+initRoll = 0;
 
 gridX = 0;
 gridY = 0;
@@ -105,6 +106,10 @@ state = "idle"
 if(actions &gt; 0){
     obj_cursor.selectedActor = id;
     movement_range(map[gridX, gridY], move, actions);
+}
+
+else{
+    obj_control.currentActor = noone;
 }
 
 </string>

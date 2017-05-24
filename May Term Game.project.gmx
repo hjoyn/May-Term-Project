@@ -11,6 +11,7 @@
     <sprite>sprites\spr_Stell</sprite>
     <sprite>sprites\spr_wall</sprite>
     <sprite>sprites\spr_tree</sprite>
+    <sprite>sprites\spr_Gabar</sprite>
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
@@ -28,6 +29,7 @@
     <object>objects\obj_terrain</object>
     <object>objects\obj_wall</object>
     <object>objects\obj_treeSpace</object>
+    <object>objects\obj_Gabar</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\room0</room>
