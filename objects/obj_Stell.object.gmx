@@ -36,23 +36,35 @@ race = "Human";
 //Character statistics
 
 level = 1;
-
-profmod = 2 + floor(level/5);
+//Base stats
+profMod = 2 + floor(level/5);
 
 strMod = 3;
 dexMod = 0;
 conMod = 2;
 intMod = 1;
-wisMod = 0;
+magMod = 0;
 
+//Health stats
 maxHitPoints = 10 + conMod + (level - 1) * (4 + conMod);
 hitPoints = maxHitPoints;
 
+//Attack variabels
 hitBonus = profMod + strMod;
 
+//Damage variables
+damageDice = 8;
+damageBonus = strMod;
+damageType = "slashing";
+
+//Defense variables
+armorClass = 18;
+
+//Movement and action variables
 move = 4;
 actions = 2;
 
+//Initiative
 initiative = dexMod;
 initRoll = 0;
 </string>

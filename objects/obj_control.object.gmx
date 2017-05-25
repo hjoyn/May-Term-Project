@@ -136,15 +136,15 @@ case "initializing":
     
             switch(tempTerrain.type){
                 case "wall":
+                 instance_change(obj_wall, true);
                  type = "wall";
-                 sprite_index = spr_wall;
                  passable = false;
               
                  break;
             
                 case "tree":
+                instance_change(obj_treeSpace, true);
                 type = "tree";
-                sprite_index = spr_tree;
                 cost = 2;
             
                 break;
@@ -197,6 +197,7 @@ case "initializing":
             currentActor = ds_list_find_value(turnOrder, turnCounter);
             
             currentActor.actions= 2;
+            currentActor.canAct = true;
             
             //only pass off actions and cursor control if actor is BLUE_ARMY
             //otherwise set flash variable to true and set alarm
@@ -204,6 +205,13 @@ case "initializing":
                 obj_cursor.selectedActor = currentActor;
      
                 movement_range(map[currentActor.gridX, currentActor.gridY], currentActor.move, currentActor.actions);
+                
+                switch(currentActor.attackType){
+                    case "ranged":
+                        ranged_attack_range(currentActor);
+                        break;
+                }
+                
             }else{
                 currentActor.flash = true;
                 currentActor.alarm[0] = 30;

@@ -12,7 +12,7 @@
     <sprite>sprites\spr_wall</sprite>
     <sprite>sprites\spr_tree</sprite>
     <sprite>sprites\spr_Gabar</sprite>
-    <sprite>sprites\sp_enemy</sprite>
+    <sprite>sprites\spr_enemy</sprite>
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
@@ -20,6 +20,7 @@
     <script>scripts\wipe_nodes.gml</script>
     <script>scripts\color_move_node.gml</script>
     <script>scripts\movement_range.gml</script>
+    <script>scripts\ranged_attack_range.gml</script>
   </scripts>
   <objects name="objects">
     <object>objects\obj_Node</object>
@@ -31,7 +32,9 @@
     <object>objects\obj_wall</object>
     <object>objects\obj_treeSpace</object>
     <object>objects\obj_Gabar</object>
-    <object>objects\o_enemy</object>
+    <object>objects\obj_enemy</object>
+    <object>objects\obj_Cibenus</object>
+    <object>objects\obj_Wetram</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\room0</room>

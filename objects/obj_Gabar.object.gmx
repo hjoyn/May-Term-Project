@@ -37,6 +37,7 @@ race = "Human";
 
 level = 1;
 
+//Base statistics
 profmod = 2 + floor(level/5);
 
 strMod = 3;
@@ -45,14 +46,23 @@ conMod = 1;
 intMod = 0;
 wisMod = 3;
 
+//Health statistics
 maxHitPoints = 8 + conMod + (level - 1) * (5 + conMod);
 hitPoints = maxHitPoints;
 
-hitBonus = profMod + strMod;
+//Attack variables
+hitBonus = profMod + intMod;
+attackType = "ranged";
+attackRange = 15 * GRID_SIZE;
 
+//Defense variables
+armorClass = 16;
+
+//Movement and action variables
 move = 6;
 actions = 2;
 
+//Initiative variables
 initiative = dexMod;
 initRoll = 0;
 </string>
