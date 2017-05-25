@@ -183,13 +183,21 @@ if(hoverNode != noone){
 }
 
 if(selectedActor != noone){
-    tempText = selectedActor.name;
+    tempText = selectedActor.name + " the " + selectedActor.race + " " + selectedActor.class;
+     
+    tempHitPoints = "HP: " + string(selectedActor.hitPoints) + " / " + string(selectedActor.maxHitPoints);
+    
+    tempHitBonus = "Hit Bonus: " + string(selectedActor.hitBonus);
     
     draw_set_color(c_black);
-    draw_rectangle(room_width/2, 0, room_width/2 + string_width(tempText), string_height(tempText), false);
+    draw_rectangle(0, room_height, string_width(tempHitBonus), room_height - string_height(tempHitBonus), false);
+    draw_rectangle(0, room_height - 16, string_width(tempHitPoints), room_height - 16 - string_height(tempHitPoints), false);
+    draw_rectangle(0, room_height - 32, string_width(tempText), room_height - 32 - string_height(tempText), false);
     
     draw_set_color(c_white);
-    draw_text(room_width/2, 0, tempText);
+    draw_text(0, room_height - string_height(tempHitBonus), tempHitBonus);
+    draw_text(0, room_height - 16 - string_height(tempHitPoints), tempHitPoints);
+    draw_text(0, room_height - 32 - string_height(tempText), tempText);
 }
     
 </string>

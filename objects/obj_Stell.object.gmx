@@ -26,8 +26,35 @@
           <argument>
             <kind>1</kind>
             <string>event_inherited();
+
 name = "Stell";
 
+class = "Knight";
+
+race = "Human";
+
+//Character statistics
+
+level = 1;
+
+profmod = 2 + floor(level/5);
+
+strMod = 3;
+dexMod = 0;
+conMod = 2;
+intMod = 1;
+wisMod = 0;
+
+maxHitPoints = 10 + conMod + (level - 1) * (4 + conMod);
+hitPoints = maxHitPoints;
+
+hitBonus = profMod + strMod;
+
+move = 4;
+actions = 2;
+
+initiative = dexMod;
+initRoll = 0;
 </string>
           </argument>
         </arguments>
