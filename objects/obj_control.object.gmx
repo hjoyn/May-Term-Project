@@ -25,9 +25,11 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>state = "initializing";
+            <string>draw_set_font(f_Default);
 
 randomize();
+
+state = "initializing";
 
 turnOrder = ds_list_create();
  

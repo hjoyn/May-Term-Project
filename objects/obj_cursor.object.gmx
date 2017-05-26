@@ -121,7 +121,17 @@ if(mouse_check_button_pressed(mb_right)){
         //Clear selected actor
         selectedActor = noone;
     }
- 
+    
+    if(selectedActor != noone &amp;&amp; hoverNode.attackNode){
+        selectedActor.canAct = false;
+        selectedActor.actions -= 1;
+        selectedActor.attackTarget = hoverNode.occupant;
+        selectedActor.state = "begin attack";
+        selectedActor.attackTimer = 10;
+        
+        selectedActor = noone;
+        wipe_nodes();
+    }
 }
 </string>
           </argument>
@@ -187,7 +197,7 @@ if(selectedActor != noone){
      
     tempHitPoints = "HP: " + string(selectedActor.hitPoints) + " / " + string(selectedActor.maxHitPoints);
     
-    tempHitBonus = "Hit Bonus: " + string(selectedActor.hitBonus);
+    tempHitBonus = "Hit Bonus: " + string(selectedActor.equipDmg);
     
     draw_set_color(c_black);
     draw_rectangle(0, room_height, string_width(tempHitBonus), room_height - string_height(tempHitBonus), false);

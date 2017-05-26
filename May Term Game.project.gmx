@@ -13,6 +13,8 @@
     <sprite>sprites\spr_tree</sprite>
     <sprite>sprites\spr_Gabar</sprite>
     <sprite>sprites\spr_enemy</sprite>
+    <sprite>sprites\spr_Biff</sprite>
+    <sprite>sprites\spr_Arow</sprite>
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
@@ -22,6 +24,11 @@
     <script>scripts\movement_range.gml</script>
     <script>scripts\ranged_attack_range.gml</script>
   </scripts>
+  <fonts name="fonts">
+    <font>fonts\f_Default</font>
+    <font>fonts\f_Damage</font>
+    <font>fonts\f_Crit</font>
+  </fonts>
   <objects name="objects">
     <object>objects\obj_Node</object>
     <object>objects\obj_control</object>
@@ -35,6 +42,10 @@
     <object>objects\obj_enemy</object>
     <object>objects\obj_Cibenus</object>
     <object>objects\obj_Wetram</object>
+    <object>objects\obj_DamageText</object>
+    <object>objects\obj_Biff</object>
+    <object>objects\obj_RangedAttack</object>
+    <object>objects\obj_Arrow</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\room0</room>

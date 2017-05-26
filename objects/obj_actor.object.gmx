@@ -42,31 +42,41 @@ race = "Human";
 
 level = 1;
 
+//Base statistics
 profMod = 2 + floor(level/5);
 
-strMod = 0;
-dexMod = 0;
 conMod = 0;
-intMod = 0;
-wisMod = 0;
+defMod = 0;
+resMod = 0;
+dexMod = 0;
+strMod = 0;
+magMod = 0;
+
+//Equipment variables
+atkMod = 0;
+spellMod = 0;
+armorMod = 0;
+resistMod = 0;
 
 //Health variables
 maxHitPoints = 4 + conMod + (level - 1) * (3 + conMod);
 hitPoints = maxHitPoints;
 
 //Attack variables
-hitBonus = profMod + strMod;
 attackType = "melee";
 attackTarget = noone;
 attackTimer = 0;
+critChance = 20;
+critMod = 1.5;
 
 //Damage variables
-damageDice = 4;
-damageBonus = strMod;
 damageType = "piercing";
+baseDmg = profMod + strMod;
+equipDmg = baseDmg + atkMod;
 
-//Defense variables
-armorClass = 10 + dexMod;
+//Defensive variables
+baseDef = profMod + defMod;
+baseRes = profMod + resMod;
 
 //Move and action Variables
 move = 6;
@@ -82,6 +92,10 @@ path_set_kind(movementPath, 2);
 path_set_closed(movementPath, false);   
 
 moveSpeed = 8;
+
+//Effects
+shake = 0;
+shakeMag = 0;
 </string>
           </argument>
         </arguments>
@@ -104,7 +118,9 @@ moveSpeed = 8;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>switch(state){
+            <string>shake -= 1;
+
+switch(state){
     case "begin path":
         //Begin moving
         path_start(movementPath, moveSpeed, 0 , true);
@@ -112,6 +128,90 @@ moveSpeed = 8;
         state = "moving";
         
         break;
+    
+    case "begin attack":
+        attackTimer -= 1;
+        if(attackTimer &lt;= 0){
+            state = "attack";
+        }
+        
+        break;
+    
+    case "attack":
+        hitMod = 1.25;
+        critRoll = irandom_range(1, critChance);
+        if(critRoll = 1){
+            attackStatus = "crit";
+        }
+        
+        switch(attackType){
+            case "ranged":
+                hitChance = max(95, 70 + (dexMod - attackTarget.dexMod) * hitMod);
+                if(random_range(1, 100) &lt;= hitChance){
+                    attackStatus = "hit";
+                }
+                else{
+                    attackStatus = "miss";
+                }
+                
+                attackDamage = max(1, equipDmg - (attackTarget.baseDef + attackTarget.armorMod));
+                
+                if(attackStatus = "crit"){
+                    attackDamage *= 1.5;
+                }
+                
+                attackDir = point_direction(x + 32, y + 32, attackTarget.x + 32, attackTarget.y + 32);
+                
+                beginX = x + 32 + lengthdir_x(30, attackDir);
+                beginY = y + 32 + lengthdir_y(30, attackDir);
+                
+                with(instance_create(beginX, beginY, obj_Arrow)){
+                    target = other.attackTarget;
+                    status = other.attackStatus;
+                    damage = other.attackDamage;
+                    damageType = other.damageType;
+                    
+                    path_add_point(movementPath, x, y, 100);
+                    
+                    if(status != "miss"){
+                        path_add_point(movementPath, target.x + 32, target.y + 32, 100);
+                        
+                    }
+                    else{
+                        path_add_point(movementPath, target.x + (irandom_range(60, 100) * choose(-1, 1)), target.y + (irandom_range(60, 100) * choose(-1, 1)), 100);
+                    }
+                    
+                    path_start(movementPath, speed, true, true);
+                }
+                
+                state = "end attack";
+                
+                attackTimer = 30;
+                
+                break;
+        }
+        
+        break; 
+    
+    case "end attack":
+            attackTimer -=1;
+            
+            if(attackTimer &lt;= 0){
+                if(actions &gt; 0){
+                    obj_cursor.selectedActor = id;
+                    
+                    movement_range(map[gridX, gridY], move, actions);
+                }
+                else{
+                    obj_control.currentActor = noone;
+                }
+                
+                state = "idle";
+            }
+        break;
+    
+    
+    
 }
 </string>
           </argument>
@@ -205,8 +305,14 @@ if(obj_cursor.selectedActor == id){
     }
 }
 
+if(shake &gt; 0){
+    draw_sprite_ext(sprite_index, -1, x + irandom_range(-shakeMag, shakeMag), y + irandom_range(-shakeMag, shakeMag), 1, 1, 0, c_white, 1);
+}
+else{
+    draw_self();
+}
 
-draw_self();
+
 </string>
           </argument>
         </arguments>

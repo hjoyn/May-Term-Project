@@ -38,25 +38,41 @@ race = "Human";
 level = 1;
 
 //Base statistics
-profmod = 2 + floor(level/5);
+profMod = 2 + floor(level/5);
 
-strMod = 3;
+conMod = 0;
+defMod = 0;
+resMod = 0;
 dexMod = 0;
-conMod = 1;
-intMod = 0;
-wisMod = 3;
+strMod = 5;
+magMod = 0;
 
-//Health statistics
-maxHitPoints = 8 + conMod + (level - 1) * (5 + conMod);
+//Equipment variables
+atkMod = 0;
+spellMod = 0;
+armorMod = 0;
+resistMod = 0;
+
+//Health variables
+maxHitPoints = 4 + conMod + (level - 1) * (3 + conMod);
 hitPoints = maxHitPoints;
 
 //Attack variables
-hitBonus = profMod + intMod;
 attackType = "ranged";
 attackRange = 15 * GRID_SIZE;
+attackTarget = noone;
+attackTimer = 0;
+critChance = 20;
+critMod = 1.5;
 
-//Defense variables
-armorClass = 16;
+//Damage variables
+damageType = "piercing";
+baseDmg = profMod + strMod;
+equipDmg = baseDmg + atkMod;
+
+//Defensive variables
+baseDef = profMod + defMod;
+baseRes = profMod + resMod;
 
 //Movement and action variables
 move = 6;
