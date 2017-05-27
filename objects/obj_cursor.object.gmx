@@ -70,27 +70,7 @@ if(mouse_check_button_pressed(mb_right)){
     if(selectedActor != noone &amp;&amp; hoverNode.moveNode){
         current = hoverNode;
         
-        //Priority queue
-        path = ds_priority_create();
-        
-        //Add nodes to path 
-        ds_priority_add(path, current, current.G);
-        while(current.parent != noone){
-            ds_priority_add(path, current.parent, current.parent.G);
-            
-            current = current.parent;
-        }
-        
-        do{
-            //Take node from queue
-            current = ds_priority_delete_min(path);
-            
-            path_add_point(selectedActor.movementPath, current.x, current.y, 100);
-        }
-        until(ds_priority_empty(path));
-        
-        //Collect queue memory
-        ds_priority_destroy(path);
+       create_path(selectedActor, current);
         
         //Clear actor's node
         map[selectedActor.gridX, selectedActor.gridY].occupant = noone;
@@ -104,6 +84,7 @@ if(mouse_check_button_pressed(mb_right)){
         
         //Set actor state
         selectedActor.state = "begin path";
+        selectedActor.endPath = "ready"
         
         //Set actions remaining
         if(hoverNode.G &gt; selectedActor.move){
@@ -123,15 +104,80 @@ if(mouse_check_button_pressed(mb_right)){
     }
     
     if(selectedActor != noone &amp;&amp; hoverNode.attackNode){
-        selectedActor.canAct = false;
-        selectedActor.actions -= 1;
-        selectedActor.attackTarget = hoverNode.occupant;
-        selectedActor.state = "begin attack";
-        selectedActor.attackTimer = 10;
+        switch(selectedActor.attackType){
+            case "ranged":
+                selectedActor.canAct = false;
+                selectedActor.actions -= 1;
+                selectedActor.attackTarget = hoverNode.occupant;
+                selectedActor.state = "begin attack";
+                selectedActor.attackTimer = 10;
+                
+                selectedActor = noone;
+                wipe_nodes();
+                
+                break;
+            
+            case "melee":
+                selectedActor.canAct = false;
+                
+                selectedActor.attackTarget = hoverNode.occupant;
+                
+                tempX = abs(hoverNode.gridX - selectedActor.gridX);
+                tempY = abs(hoverNode.gridY - selectedActor.gridY);
+                
+                if(tempX &lt;= 1 &amp;&amp; tempY &lt;= 1){
+                    selectedActor.actions -= 1;
+                    selectedActor.state = "begin attack";
+                    selectedActor.attackTimer = 10;
+                    
+                    selectedActor = noone;
+                    wipe_nodes();
+                }else{
+                    tempG = 100;
+                    current = noone;
+                    
+                    for(ii = 0; ii &lt; ds_list_size(hoverNode.neighbors); ii += 1){
+                        tempNode = ds_list_find_value(hoverNode.neighbors, ii);
+                        
+                        if(tempNode.occupant == noone &amp;&amp; tempNode.G &gt; 0 &amp;&amp; tempNode.G &lt; tempG){
+                            tempG = tempNode.G;
+                            current = tempNode;
+                        }
+                        
+                    }
+                    targetNode = current;
+                    
+                    create_path(selectedActor, targetNode);
+                    
+                     //Clear actor's node
+                    map[selectedActor.gridX, selectedActor.gridY].occupant = noone;
+                    
+                    //Move actor to new node
+                    selectedActor.gridX = targetNode.gridX;
+                    selectedActor.gridY = targetNode.gridY;
+                    
+                    //Place actor in target node
+                    targetNode.occupant = selectedActor;
+                    
+                    //Set actor state
+                    selectedActor.state = "begin path";
+                    selectedActor.endPath = "ready"
+                    selectedActor.attackTarget = hoverNode.occupant;
+                    selectedActor.actions -= 2;
+                    selectedActor.canAct = false;
+                    
+                    selectedActor = noone;
+                    wipe_nodes();
+                    
+                }
+                
+             
+                
+                break;
+        }
         
-        selectedActor = noone;
-        wipe_nodes();
     }
+    
 }
 </string>
           </argument>

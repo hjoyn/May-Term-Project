@@ -83,6 +83,9 @@ move = 6;
 actions = 2;
 canAct = false;
 
+//special action variales
+charge = false;
+
 initiative = dexMod;
 initRoll = 0;
 
@@ -92,6 +95,8 @@ path_set_kind(movementPath, 2);
 path_set_closed(movementPath, false);   
 
 moveSpeed = 8;
+
+endPath = "idle";
 
 //Effects
 shake = 0;
@@ -143,10 +148,7 @@ switch(state){
         if(critRoll = 1){
             attackStatus = "crit";
         }
-        
-        switch(attackType){
-            case "ranged":
-                hitChance = max(95, 70 + (dexMod - attackTarget.dexMod) * hitMod);
+           hitChance = max(95, 70 + (dexMod - attackTarget.dexMod) * hitMod);
                 if(random_range(1, 100) &lt;= hitChance){
                     attackStatus = "hit";
                 }
@@ -160,6 +162,10 @@ switch(state){
                     attackDamage *= 1.5;
                 }
                 
+        
+        switch(attackType){
+            case "ranged":
+             
                 attackDir = point_direction(x + 32, y + 32, attackTarget.x + 32, attackTarget.y + 32);
                 
                 beginX = x + 32 + lengthdir_x(30, attackDir);
@@ -189,6 +195,59 @@ switch(state){
                 attackTimer = 30;
                 
                 break;
+                
+                case "melee":
+                    if(attackStatus != "miss"){
+                        for(ii = 0; ii &lt; 6; ii += 1){
+                            with(instance_create(attackTarget.x + 16, attackTarget.y + 16, obj_Biff)){
+                                direction = irandom(360);
+                                speed = choose(2, 4);
+                                scale = choose(2, 3);
+                                
+                                image_speed = 0.5;
+                                
+                                if(other.attackStatus == "crit"){
+                                    color = c_yellow;
+                                }
+                                
+                            }
+                            
+                        }
+                        
+                        if(attackStatus == "crit"){
+                            attackTarget.shake = 8;
+                            attackTarget.shakeMag = 8;
+                        }else{
+                            attackTarget.shake = 4;
+                            attackTarget.shakeMag = 4;
+                        }
+                        
+                        attackTarget.hitPoints -= attackDamage;
+                        
+                        with(instance_create(attackTarget.x + 28, attackTarget.y + 2, obj_DamageText)){
+                            text = "-" + string(other.attackDamage);
+                            
+                            ground = y;
+                            
+                            if(other.attackStatus == "crit"){
+                                font = f_Crit; 
+                            }
+                            
+                        }
+                        
+                    }else{
+                        with(instance_create(attackTarget.x +28, attackTarget.y +2,obj_DamageText)){
+                            text = "miss"
+                            
+                            ground = y;
+                        }
+                
+                }
+                                                       
+                state = "end attack";
+                    
+                break;
+            
         }
         
         break; 
@@ -238,24 +297,30 @@ switch(state){
             <string>//Clear path
 path_clear_points(movementPath);
 
-state = "idle"
-
-if(actions &gt; 0){
-    obj_cursor.selectedActor = id;
-    movement_range(map[gridX, gridY], move, actions);
+if(endPath == "ready"){
+    state = "idle"
     
-    if(canAct){
-        switch(attackType){
-            case "ranged":
-                ranged_attack_range(id);
-                break;
+    if(actions &gt; 0){
+        obj_cursor.selectedActor = id;
+        movement_range(map[gridX, gridY], move, actions);
+        
+        if(canAct){
+            switch(attackType){
+                case "ranged":
+                    ranged_attack_range(id);
+                    break;
+                    
+                case "melee":
+                    melee_attack_range(id);
+                    break;
+            }
         }
+        
+    }else{
+        obj_control.currentActor = noone;
     }
-    
-}
-
-else{
-    obj_control.currentActor = noone;
+}else{
+    state = endPath;
 }
 
 </string>
@@ -299,6 +364,37 @@ if(obj_cursor.selectedActor == id){
             switch(attackType){
                 case "ranged":
                     draw_line_width_colour(x + 32, y + 32, tempNode.x + 32, tempNode.y + 32, 4, c_purple, c_purple);
+                    break;
+                    
+                case "melee":
+                    tempX = abs(tempNode.gridX - gridX);
+                    tempY = abs(tempNode.gridY - gridY);
+                    
+                    if(tempX &lt;= 1 &amp;&amp;tempY &lt;= 1){
+                        draw_line_width_colour(x + 16, y + 16, tempNode.x + 16, tempNode.y +16, 4, c_purple, c_purple);
+                    }else{
+                        current = noone;
+                        tempG = 100;
+                        
+                        for(ii = 0; ii &lt; ds_list_size(tempNode.neighbors); ii += 1){
+                            neighbor = ds_list_find_value(tempNode.neighbors, ii);
+                            
+                            if(neighbor.occupant == noone &amp;&amp; neighbor.G &gt; 0 &amp;&amp; neighbor.G &lt; tempG){
+                                tempG = neighbor.G;
+                                current = neighbor;
+                                
+                            }
+                        }
+                        
+                        draw_line_width_colour(tempNode.x + 16, tempNode.y + 16, current.x + 16, current.y + 16, 4, c_purple, c_purple);
+                        
+                        while(current.parent != noone){
+                            draw_line_width_colour(current.x + 16, current.y + 16, current.parent.x +16, current.parent.y + 16, 4, c_purple, c_purple);
+                            
+                            current = current.parent; 
+                        
+                        } 
+                    }
                     break;
             }
         }
