@@ -2,7 +2,7 @@
 
 actor = argument0;
 buttonList = ds_list_create();
-for(i = 0; i < ds_list_size(actor.defaultAction); i += 1)
+for(i = 0; i < ds_list_size(actor.defaultActions); i += 1)
 {
     ds_list_add(buttonList, ds_list_find_value(actor.defaultActions, i));
 }
