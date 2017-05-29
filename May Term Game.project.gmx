@@ -15,6 +15,10 @@
     <sprite>sprites\spr_enemy</sprite>
     <sprite>sprites\spr_Biff</sprite>
     <sprite>sprites\spr_Arow</sprite>
+    <sprite>sprites\sprite9</sprite>
+    <sprite>sprites\spr_ButtonDefault</sprite>
+    <sprite>sprites\spr_ButtonEndTurn</sprite>
+    <sprite>sprites\spr_ConfrimButton</sprite>
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
@@ -25,11 +29,16 @@
     <script>scripts\ranged_attack_range.gml</script>
     <script>scripts\melee_attack_range.gml</script>
     <script>scripts\create_path.gml</script>
+    <script>scripts\create_buttons.gml</script>
+    <script>scripts\perform_buttons.gml</script>
+    <script>scripts\wipe_buttons.gml</script>
+    <script>scripts\perform_action.gml</script>
   </scripts>
   <fonts name="fonts">
     <font>fonts\f_Default</font>
     <font>fonts\f_Damage</font>
     <font>fonts\f_Crit</font>
+    <font>fonts\f_HotKey</font>
   </fonts>
   <objects name="objects">
     <object>objects\obj_Node</object>
@@ -48,6 +57,9 @@
     <object>objects\obj_Biff</object>
     <object>objects\obj_RangedAttack</object>
     <object>objects\obj_Arrow</object>
+    <object>objects\obj_Selector</object>
+    <object>objects\obj_Button</object>
+    <object>objects\obj_ConfirmButton</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\room0</room>
