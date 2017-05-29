@@ -83,8 +83,6 @@ move = 6;
 actions = 2;
 canAct = false;
 
-//special action variales
-charge = false;
 
 initiative = dexMod;
 initRoll = 0;

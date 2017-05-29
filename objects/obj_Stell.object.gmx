@@ -77,8 +77,6 @@ baseRes = profMod + resMod;
 move = 4;
 actions = 2;
 
-//special action variavles
-charge = true;
 
 //Initiative
 initiative = dexMod;

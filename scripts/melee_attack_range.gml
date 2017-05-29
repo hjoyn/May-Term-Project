@@ -4,14 +4,6 @@ actor = argument0;
 
 actions = actor.actions;
 
-if(actor.charge){
-    range = actor.move * actor.actions;
-
-    
-}else{
-    range = actor.move;
-
-}
 
 with(obj_actor){    
     if(army != other.actor.army){
@@ -28,9 +20,7 @@ with(obj_actor){
                     for(ii = 0; ii < ds_list_size(node.neighbors); ii += 1){
                         neighbor = ds_list_find_value(node.neighbors, ii);
                         
-                        if(neighbor.G > 0 && neighbor.G <= other.range){
-                            map[gridX, gridY].attackNode = true;
-                            map[gridX, gridY].color =c_red;
+                        
                             
                         }
                         
@@ -40,6 +30,6 @@ with(obj_actor){
         
         }
             
-    }
+    
     
 
