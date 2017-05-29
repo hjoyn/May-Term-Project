@@ -65,7 +65,7 @@ hitPoints = maxHitPoints;
 //Attack variables
 attackType = "melee";
 attackTarget = noone;
-attackTimer = 0;
+actionTimer = 0;
 critChance = 20;
 critMod = 1.5;
 
@@ -84,8 +84,17 @@ actions = 2;
 canAct = false;
 
 
+//initiative variables
 initiative = dexMod;
 initRoll = 0;
+
+//variables related to buttons
+defaultActions = ds_list_create();
+
+ds_list_add(defaultActions, "end turn");
+
+//spell and action variables
+readiedAction = "error";
 
 //Pathing
 movementPath = path_add();
@@ -133,8 +142,8 @@ switch(state){
         break;
     
     case "begin attack":
-        attackTimer -= 1;
-        if(attackTimer &lt;= 0){
+        actionTimer -= 1;
+        if(actionTimer &lt;= 0){
             state = "attack";
         }
         
@@ -190,7 +199,7 @@ switch(state){
                 
                 state = "end attack";
                 
-                attackTimer = 30;
+                actionTimer = 30;
                 
                 break;
                 
@@ -251,9 +260,9 @@ switch(state){
         break; 
     
     case "end attack":
-            attackTimer -=1;
+            actionTimer -=1;
             
-            if(attackTimer &lt;= 0){
+            if(actionTimer &lt;= 0){
                 if(actions &gt; 0){
                     obj_cursor.selectedActor = id;
                     
@@ -265,10 +274,44 @@ switch(state){
                 
                 state = "idle";
             }
+        break; 
+        
+    case "begin action":
+          
+        break;
+        
+    case "perform action":
+        perform_action(id, readiedAction);
+        
+        wipe_nodes();
         break;
     
-    
-    
+    case "end action":
+        actionTimer -= 1;
+        
+        if(actionTimer&lt;=0)
+        {
+        state = "idle";
+        }
+        if(actions &gt; 0)
+        {
+         movement_range(map[gridX, gridY], move, actions);
+        }
+        else
+        {
+        state = "idle";
+        obj_control.currentActor = noone;
+        }
+    break;
+    case "end turn":
+    actionTimer=-1;
+    if(actionTimer &lt;=0)
+    {
+    obj_cursor.selectedActor = noone;
+    obj_control.currentActor = noone;
+    state = "idle";
+    }
+    break;
 }
 </string>
           </argument>
@@ -344,7 +387,7 @@ if(endPath == "ready"){
           <argument>
             <kind>1</kind>
             <string>//If cursor is hovering over a different node than actor's
-if(obj_cursor.selectedActor == id){ 
+if(obj_cursor.selectedActor == id &amp;&amp; obj_cursor.hoverNode != noone){ 
     if(obj_cursor.hoverNode != noone){
         tempNode = obj_cursor.hoverNode;
         if(tempNode.moveNode){

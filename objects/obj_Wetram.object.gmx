@@ -78,6 +78,11 @@ actions = 2;
 
 initiative = dexMod;
 initRoll = 0;
+
+//variables related to buttons
+defaultActions = ds_list_create();
+
+ds_list_add(defaultActions, "end turn");
 </string>
           </argument>
         </arguments>
