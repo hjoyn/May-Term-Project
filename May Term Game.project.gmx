@@ -6,33 +6,49 @@
   <NewExtensions/>
   <sounds name="sound"/>
   <sprites name="sprites">
-    <sprite>sprites\spr_Node</sprite>
-    <sprite>sprites\spr_selected</sprite>
-    <sprite>sprites\spr_Stell</sprite>
-    <sprite>sprites\spr_wall</sprite>
-    <sprite>sprites\spr_tree</sprite>
-    <sprite>sprites\spr_Gabar</sprite>
-    <sprite>sprites\spr_enemy</sprite>
-    <sprite>sprites\spr_Biff</sprite>
-    <sprite>sprites\spr_Arow</sprite>
-    <sprite>sprites\sprite9</sprite>
-    <sprite>sprites\spr_ButtonDefault</sprite>
-    <sprite>sprites\spr_ButtonEndTurn</sprite>
-    <sprite>sprites\spr_ConfrimButton</sprite>
+    <sprites name="Buttons and UI">
+      <sprite>sprites\spr_ButtonDefault</sprite>
+      <sprite>sprites\spr_ConfrimButton</sprite>
+      <sprite>sprites\spr_ButtonEndTurn</sprite>
+    </sprites>
+    <sprites name="Nodes and Terrain">
+      <sprite>sprites\spr_wall</sprite>
+      <sprite>sprites\spr_tree</sprite>
+      <sprite>sprites\spr_Node</sprite>
+    </sprites>
+    <sprites name="Actors">
+      <sprite>sprites\spr_Stell</sprite>
+      <sprite>sprites\spr_Gabar</sprite>
+      <sprite>sprites\spr_enemy</sprite>
+    </sprites>
+    <sprites name="Effects">
+      <sprite>sprites\spr_Arow</sprite>
+      <sprite>sprites\spr_selected</sprite>
+      <sprite>sprites\spr_Biff</sprite>
+      <sprite>sprites\spr_flame</sprite>
+    </sprites>
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
   <scripts name="scripts">
-    <script>scripts\wipe_nodes.gml</script>
     <script>scripts\color_move_node.gml</script>
-    <script>scripts\movement_range.gml</script>
-    <script>scripts\ranged_attack_range.gml</script>
-    <script>scripts\melee_attack_range.gml</script>
-    <script>scripts\create_path.gml</script>
-    <script>scripts\create_buttons.gml</script>
-    <script>scripts\perform_buttons.gml</script>
-    <script>scripts\wipe_buttons.gml</script>
-    <script>scripts\perform_action.gml</script>
+    <script>scripts\wipe_nodes.gml</script>
+    <scripts name="Pathing and Rangefinding">
+      <script>scripts\movement_range.gml</script>
+      <script>scripts\create_path.gml</script>
+      <script>scripts\ranged_attack_range.gml</script>
+      <script>scripts\melee_attack_range.gml</script>
+    </scripts>
+    <scripts name="Buttons">
+      <script>scripts\create_buttons.gml</script>
+      <script>scripts\wipe_buttons.gml</script>
+      <script>scripts\perform_buttons.gml</script>
+    </scripts>
+    <scripts name="Actions and Spells">
+      <script>scripts\perform_action.gml</script>
+      <script>scripts\fill_spell_list.gml</script>
+      <script>scripts\action_targeting.gml</script>
+    </scripts>
   </scripts>
   <fonts name="fonts">
     <font>fonts\f_Default</font>
@@ -41,25 +57,34 @@
     <font>fonts\f_HotKey</font>
   </fonts>
   <objects name="objects">
-    <object>objects\obj_Node</object>
     <object>objects\obj_control</object>
     <object>objects\obj_cursor</object>
     <object>objects\obj_actor</object>
-    <object>objects\obj_Stell</object>
-    <object>objects\obj_terrain</object>
-    <object>objects\obj_wall</object>
-    <object>objects\obj_treeSpace</object>
-    <object>objects\obj_Gabar</object>
-    <object>objects\obj_enemy</object>
-    <object>objects\obj_Cibenus</object>
-    <object>objects\obj_Wetram</object>
-    <object>objects\obj_DamageText</object>
-    <object>objects\obj_Biff</object>
-    <object>objects\obj_RangedAttack</object>
-    <object>objects\obj_Arrow</object>
-    <object>objects\obj_Selector</object>
-    <object>objects\obj_Button</object>
-    <object>objects\obj_ConfirmButton</object>
+    <object>objects\obj_Node</object>
+    <objects name="Actors">
+      <object>objects\obj_Stell</object>
+      <object>objects\obj_Gabar</object>
+      <object>objects\obj_Cibenus</object>
+      <object>objects\obj_Wetram</object>
+      <object>objects\obj_enemy</object>
+    </objects>
+    <objects name="Nodes and Terrain">
+      <object>objects\obj_wall</object>
+      <object>objects\obj_treeSpace</object>
+      <object>objects\obj_terrain</object>
+    </objects>
+    <objects name="Effects and UI">
+      <object>objects\obj_Button</object>
+      <object>objects\obj_ConfirmButton</object>
+      <object>objects\obj_confirmBox</object>
+      <object>objects\obj_Selector</object>
+      <object>objects\obj_Arrow</object>
+      <object>objects\obj_RangedAttack</object>
+      <object>objects\obj_Biff</object>
+      <object>objects\obj_DamageText</object>
+      <object>objects\obj_flameEmitter</object>
+      <object>objects\obj_flame</object>
+    </objects>
   </objects>
   <rooms name="rooms">
     <room>rooms\room0</room>

@@ -133,8 +133,8 @@ instance_create(x, y, obj_cursor);
     
 case "initializing":
     with(obj_Node){
-        if(instance_position(x + 16, y +16, obj_terrain)){
-          tempTerrain = instance_position(x + 16, y +16, obj_terrain);
+        if(instance_position(x + 32, y +32, obj_terrain)){
+          tempTerrain = instance_position(x + 32, y +32, obj_terrain);
     
             switch(tempTerrain.type){
                 case "wall":
@@ -158,8 +158,8 @@ case "initializing":
              }
        } 
        
-       if(instance_position(x + 16, y + 16, obj_actor)){
-        occupant = instance_position(x + 16, y + 16, obj_actor);
+       if(instance_position(x + 32, y + 32, obj_actor)){
+        occupant = instance_position(x + 32, y + 32, obj_actor);
         occupant.gridX = gridX;
         occupant.gridY = gridY;
         }

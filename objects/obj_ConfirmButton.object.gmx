@@ -57,6 +57,8 @@ hotKey = "error";
 
 draw_rectangle(x-256, y-128, x + 256, y, false);
 
+draw_set_colour(c_white);
+
 draw_set_font(f_Crit);
 
 draw_set_halign(fa_center);

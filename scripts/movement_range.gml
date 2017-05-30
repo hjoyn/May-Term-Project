@@ -124,7 +124,6 @@ while(ds_priority_size(open) > 0){
     color_move_node(current, argument1, argument2);
     }
 
-start.moveNode = false; 
 
 //destroy closed list
 ds_list_destroy(closed);

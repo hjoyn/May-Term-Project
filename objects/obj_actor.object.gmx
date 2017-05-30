@@ -94,7 +94,14 @@ defaultActions = ds_list_create();
 ds_list_add(defaultActions, "end turn");
 
 //spell and action variables
+spellHit = 0;
+
+firstLevelSlotMax = 0;
+firstLevelSlot = 0;
+
 readiedAction = "error";
+targetingType = "error";
+actionRange = 0;
 
 //Pathing
 movementPath = path_add();
@@ -277,7 +284,8 @@ switch(state){
         break; 
         
     case "begin action":
-          
+        wipe_nodes();
+        action_targeting(id, targetingType, actionRange);
         break;
         
     case "perform action":
@@ -300,18 +308,20 @@ switch(state){
         else
         {
         state = "idle";
+        obj_cursor.selectedActor = noone;
         obj_control.currentActor = noone;
         }
-    break;
+        break;
+    
     case "end turn":
-    actionTimer=-1;
-    if(actionTimer &lt;=0)
-    {
-    obj_cursor.selectedActor = noone;
-    obj_control.currentActor = noone;
-    state = "idle";
-    }
-    break;
+        actionTimer=-1;
+        if(actionTimer &lt;=0)
+        {
+            obj_cursor.selectedActor = noone;
+            obj_control.currentActor = noone;
+            state = "idle";
+        }
+        break;
 }
 </string>
           </argument>
