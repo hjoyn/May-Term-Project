@@ -131,6 +131,7 @@ ds_list_destroy(closed);
 
 start.moveNode = false;
 
+show_debug_message("Start: " + object_get_name(start.occupant));
 create_buttons(start.occupant);
 
 

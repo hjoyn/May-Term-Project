@@ -205,7 +205,8 @@ case "initializing":
             //otherwise set flash variable to true and set alarm
             if(currentActor.army == BLUE_ARMY){
                 obj_cursor.selectedActor = currentActor;
-     
+                
+                show_debug_message(object_get_name(map[currentActor.gridX, currentActor.gridY]));
                 movement_range(map[currentActor.gridX, currentActor.gridY], currentActor.move, currentActor.actions);
                 
                 switch(currentActor.attackType){

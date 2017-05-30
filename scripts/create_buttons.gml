@@ -2,9 +2,11 @@
 
 actor = argument0;
 buttonList = ds_list_create();
-for(i = 0; i < ds_list_size(actor.defaultActions); i += 1)
+show_debug_message("Actor: " + object_get_name(actor));
+defAct = actor.defaultActions;
+for(i = 0; i < ds_list_size(defAct); i += 1)
 {
-    ds_list_add(buttonList, ds_list_find_value(actor.defaultActions, i));
+    ds_list_add(buttonList, ds_list_find_value(defAct, i));
 }
 
 buttonY = room_height - 48;
