@@ -10,6 +10,7 @@
       <sprite>sprites\spr_ButtonDefault</sprite>
       <sprite>sprites\spr_ConfrimButton</sprite>
       <sprite>sprites\spr_ButtonEndTurn</sprite>
+      <sprite>sprites\spr_cursor</sprite>
     </sprites>
     <sprites name="Nodes and Terrain">
       <sprite>sprites\spr_wall</sprite>

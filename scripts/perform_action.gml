@@ -14,7 +14,31 @@ switch(action)
         break;
         
     //Priest spells
+    case "Healing Word":
+    target = obj_cursor.hoverNode.occupant;
     
+    heal = 6 + actor.magMod;
+    
+    heal = min(heal, target.maxHitPoints - target.hitPoints);
+    
+    target.hitPoints += heal;
+    
+    with(instance_create(target.x + 28, target.y + 4, obj_DamageText)){
+        ground = y;
+        
+        text = "+" string(other.heal);
+        
+        color = c_lime;
+        
+    }
+        
+    //actor.firstLevelSlot -= 1;
+    actor.canAct = false;
+    actor.actions -=1;
+    actor.state = "end turn";
+    actor.actionTimer = 15;
+    
+    break;
     
     //Wizard spells
     case "Burning Hands":
@@ -48,5 +72,44 @@ switch(action)
         actor.actionTimer = 30;
         
         break;
+        
+    case "Magic Missiles":
+        targets = ds_list_create();
+        
+        with(obj_Node){
+            if(actionNode){
+                ds_list_add(other.targets, id);
+            }
+            
+        }
+        
+        for(ii = 0; ii < ds_list_size(targets); ii += 1){
+            target = ds_list_find_value(targets, ii).occupant;
+            
+            with(instance_create(actor.x + 16, actor.y + 16, obj_Arrow)){
+                target = other.target;
+                status = "hit";
+                damage = 4 + magMOd;
+                damageType = "force";
+                
+                path_add_point(movementPath, other.actor.x + 16, other.actor.y + 16, 100);
+                
+                path_add_point(movementPath, other.target.x + 16, other.target.y + 16, 100);
+                
+                path_start(movementPath, speed, true, true);
+            }
+            
+        }
+        
+        ds_list_destroy(targets);
+        
+        //actor.firstLevelSlot -= 1;
+        actor.canAct = false;
+        actor.actions -= 1;
+        actor.state = "end action";
+        actor.actionTimer = 30;
+        
+        break;
+        
         
 }
