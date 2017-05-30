@@ -2,11 +2,9 @@
 
 actor = argument0;
 buttonList = ds_list_create();
-<<<<<<< HEAD
 show_debug_message("Actor: " + object_get_name(actor));
 defAct = actor.defaultActions;
-for(i = 0; i < ds_list_size(defAct); i += 1)
-=======
+
 
 if(actor.canAct){
     if(actor.firstLevelSlot > 0)
@@ -16,7 +14,6 @@ if(actor.canAct){
 }
 
 for(i = 0; i < ds_list_size(actor.defaultActions); i += 1)
->>>>>>> 6d5ed87fe2a3edea5009ee922abad4eb58b321a9
 {
     ds_list_add(buttonList, ds_list_find_value(defAct, i));
 }
@@ -44,6 +41,35 @@ switch(button)
         break;
         
         //Cleric spells
+        case "Bless":
+            with(instance_create(buttonX + (i * 96), buttonY, obj_Button))
+            { 
+                title = "BLESS";
+            
+                text = "Give all party members a small bonus to defense and resist#1d4 bonus (5 rounds)";
+            
+                hotKey = string(other.i + 1); 
+                
+                spell = true;
+                
+                //spellSlot = string(other.actor.firstLevelSlot);
+            }
+        break;
+        
+        case "Healing Word":
+            with(instance_create(buttonX + (i * 96), buttonY, obj_Button))
+            { 
+                title = "HEALING WORD";
+            
+                text = "Right-click an ally in range to heal them#1d8" + string(other.actor.magMod) + " HEALING";
+            
+                hotKey = string(other.i + 1); 
+                
+                spell = true;
+                
+                //spellSlot = string(other.actor.firstLevelSlot);
+            }
+        break;
         
         //Wizard spells
         case "Burning Hands":

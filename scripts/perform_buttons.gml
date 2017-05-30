@@ -27,7 +27,37 @@ case "END TURN":
     break;
     
     //Cleric spells
+    case "BLESS":
+        actor.state = "begin action";
+        actor.readiedAction = "Bless";
+        actor.targetingType = "visible allies";
+        actor.actionRange = 640;
+        
+        with(instance_create(room_width/2, room_height, obj_confirmButton)){
+            title = other.button.title;
+            text = other.button.text;
+        }
+        
+        wipe_nodes();
+        wipe_buttons();
+        
+        break;
     
+    case "HEALING WORD":
+        actor.state = "begin action";
+        actor.readiedAction = "Healing Word";
+        actor.targetingType = "visible allies";
+        actor.actionRange = 640;
+        
+        with(instance_create(room_width/2, room_height, obj_confirmBox)){
+            title = other.button.title;
+            text = other.button.text;
+        }
+        
+        wipe_nodes();
+        wipe_buttons();
+        
+        break;
     
     //Wizard spells
     case "BURNING HANDS":

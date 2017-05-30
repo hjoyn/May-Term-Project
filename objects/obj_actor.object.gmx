@@ -112,6 +112,9 @@ moveSpeed = 8;
 
 endPath = "idle";
 
+//Buffs
+bless = 0;
+
 //Effects
 shake = 0;
 shakeMag = 0;
@@ -140,6 +143,43 @@ shakeMag = 0;
             <string>shake -= 1;
 
 switch(state){
+    
+    case "initialize turn":
+        if(bless &gt; obj_control.roundCounter){
+            with(instance_create(x, y, obj.bless)){
+                target = other;
+            }
+        }
+        else{
+            bless = 0;
+        }
+        
+        if(army == BLUE_ARMY){
+            movement_range(map[gridX, gridY], move, actions);
+            
+            switch(attackType){
+                case "melee":
+                    melee_attack_range(id);
+                    
+                    break;
+                
+                case "ranged":
+                    ranged_attack_range(id);
+                    
+                    break;
+            }
+            
+            obj_cursor.selectedActor = id;
+        }
+        else{
+            flash = true;
+            alarm[0] = 20;
+        }
+        
+        state = "ready";
+        
+        break;
+    
     case "begin path":
         //Begin moving
         path_start(movementPath, moveSpeed, 0 , true);
@@ -162,20 +202,27 @@ switch(state){
         if(critRoll = 1){
             attackStatus = "crit";
         }
-           hitChance = max(95, 70 + (dexMod - attackTarget.dexMod) * hitMod);
-                if(random_range(1, 100) &lt;= hitChance){
-                    attackStatus = "hit";
-                }
-                else{
-                    attackStatus = "miss";
-                }
+        hitChance = max(95, 70 + (dexMod - attackTarget.dexMod) * hitMod);
+        if(random_range(1, 100) &lt;= hitChance){
+            attackStatus = "hit";
+        }
+        else{
+            attackStatus = "miss";
+        }
+        
+        attackDamage = attack_apply(id, attackTarget);
+        
+        if(attackStatus = "crit"){
+            attackDamage *= 1.5;
+        }
                 
-                attackDamage = max(1, equipDmg - (attackTarget.baseDef + attackTarget.armorMod));
-                
-                if(attackStatus = "crit"){
-                    attackDamage *= 1.5;
-                }
-                
+        if(attackStatus == "crit"){
+            attackTarget.shake = 8;
+            attackTarget.shakeMag = 8;
+        }else{
+            attackTarget.shake = 4;
+            attackTarget.shakeMag = 4;
+        }
         
         switch(attackType){
             case "ranged":
@@ -226,14 +273,6 @@ switch(state){
                                 
                             }
                             
-                        }
-                        
-                        if(attackStatus == "crit"){
-                            attackTarget.shake = 8;
-                            attackTarget.shakeMag = 8;
-                        }else{
-                            attackTarget.shake = 4;
-                            attackTarget.shakeMag = 4;
                         }
                         
                         attackTarget.hitPoints -= attackDamage;

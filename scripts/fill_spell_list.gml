@@ -13,7 +13,7 @@ for(i = 0; i <= level; i += 1){
         case "Cleric":
             switch(i){
                 case 1:
-                    //ds_list_add(actor.firstLevelSpellList, "Bless");
+                    ds_list_add(actor.firstLevelSpellList, "Bless");
                     //ds_list_add(actor.firstLevelSpellList, "Healing Word");
                     //ds_list_add(actor.firstLevelSpellList, "Guiding Bolt");
                     
