@@ -36,6 +36,34 @@ switch(targetingType){
         }
         
         break;
-
+        
+    case "visible allies":
+        with(obj_actor){
+            if(army == other.actor.army){
+                if(!collision_line(x, y, other.actor.x, other.actor.y, obj_wall, false, false)){
+                    node = map[gridX, gridY];
+                    
+                    node.actionNode = true;
+                    node.color = c_purple;
+                    
+                }
+            }
+        }
+        break;
+        
+    case "visible enemies":
+        with(obj_actor){
+            if(army != other.actor.army){
+                if(!collision_line(x, y, other.actor.x, other.actor.y, obj_wall, false, false)){
+                    node = map[gridX, gridY];
+                    
+                    node.actionNode = true;
+                    node.color = c_purple;
+                }
+                
+            }
+            
+        }
+        break;
 }
 
