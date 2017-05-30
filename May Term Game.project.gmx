@@ -20,6 +20,9 @@
       <sprite>sprites\spr_Stell</sprite>
       <sprite>sprites\spr_Gabar</sprite>
       <sprite>sprites\spr_enemy</sprite>
+      <sprite>sprites\spr_Maxine</sprite>
+      <sprite>sprites\spr_Wetram</sprite>
+      <sprite>sprites\spr_Cibenus</sprite>
     </sprites>
     <sprites name="Effects">
       <sprite>sprites\spr_Arow</sprite>
@@ -64,6 +67,7 @@
     <objects name="Actors">
       <object>objects\obj_Stell</object>
       <object>objects\obj_Gabar</object>
+      <object>objects\obj_Maxine</object>
       <object>objects\obj_Cibenus</object>
       <object>objects\obj_Wetram</object>
       <object>objects\obj_enemy</object>

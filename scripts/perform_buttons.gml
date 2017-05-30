@@ -26,7 +26,7 @@ case "END TURN":
     
     break;
     
-    //Cleric spells
+    //Priest spells
     
     
     //Wizard spells

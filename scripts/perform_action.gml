@@ -13,7 +13,7 @@ switch(action)
         actor.actionTimer = 20;
         break;
         
-    //Cleric spells
+    //Priest spells
     
     
     //Wizard spells

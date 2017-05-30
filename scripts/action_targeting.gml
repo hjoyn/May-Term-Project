@@ -15,10 +15,10 @@ switch(targetingType){
         dir = point_direction(originX, originY, obj_cursor.hoverNode.x + 32, obj_cursor.hoverNode.y + 32);
         originX += lengthdir_x(63, dir);
         originY += lengthdir_y(63, dir);
-        dist = range - 32;
+        dist = range - 8;
         
-        for(i = -60; i <= 60; i += 30){
-            for(j = 0; j <= dist; j += 16){
+        for(i = -60; i <= 60; i += 16){
+            for(j = 0; j <= dist; j += 32){
                 tempX = originX + lengthdir_x(j, dir + i);
                 tempY = originY + lengthdir_y(j, dir + i);
                 
