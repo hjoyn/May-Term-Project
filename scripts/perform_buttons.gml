@@ -26,15 +26,14 @@ case "END TURN":
     
     break;
     
-<<<<<<< HEAD
-    //Cleric spells
+    //Priest spells
     case "BLESS":
         actor.state = "begin action";
         actor.readiedAction = "Bless";
         actor.targetingType = "visible allies";
         actor.actionRange = 640;
         
-        with(instance_create(room_width/2, room_height, obj_confirmButton)){
+        with(instance_create(room_width/2, room_height, obj_ConfirmButton)){
             title = other.button.title;
             text = other.button.text;
         }
@@ -43,9 +42,6 @@ case "END TURN":
         wipe_buttons();
         
         break;
-=======
-    //Priest spells
->>>>>>> e2efe1a469afef7190f0a60958a255b8b4120f00
     
     case "HEALING WORD":
         actor.state = "begin action";

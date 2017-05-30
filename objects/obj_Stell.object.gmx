@@ -44,7 +44,7 @@ conMod = 0;
 defMod = 0;
 resMod = 0;
 dexMod = 0;
-strMod = 0;
+strMod = 10;
 magMod = 0;
 
 //Equipment variables

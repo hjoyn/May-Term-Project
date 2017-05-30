@@ -13,8 +13,7 @@ switch(action)
         actor.actionTimer = 20;
         break;
         
-<<<<<<< HEAD
-    //Cleric spells
+    //Priest spells
     case "Bless":
         targets = ds_list_create();
         
@@ -27,6 +26,7 @@ switch(action)
         for(i = 0; i < ds_list_size(targets); i+= 1){
             target = ds_list_find_value(targets, i).occupant;
             
+            show_debug_message("Bless: " + object_get_name(target));
             target.bless = obj_control.roundCounter + 5;
             
             with(instance_create(target.x, target.y, obj_bless)){
@@ -43,9 +43,6 @@ switch(action)
         actor.actionTimer = 15; 
         
         break;
-=======
-    //Priest spells
->>>>>>> e2efe1a469afef7190f0a60958a255b8b4120f00
     
     case "Healing Word":
         target = obj_cursor.hoverNode.occupant;
@@ -77,7 +74,7 @@ switch(action)
         targets = ds_list_create();
         
         //damage = constant + magic stat of user
-        damage = 5 + actor.magMod; 
+        damage = 50 + actor.magMod; 
         
         with(obj_Node){
             if(actionNode){
