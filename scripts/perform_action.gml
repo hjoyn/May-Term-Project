@@ -13,6 +13,7 @@ switch(action)
         actor.actionTimer = 20;
         break;
         
+<<<<<<< HEAD
     //Cleric spells
     case "Bless":
         targets = ds_list_create();
@@ -42,6 +43,9 @@ switch(action)
         actor.actionTimer = 15; 
         
         break;
+=======
+    //Priest spells
+>>>>>>> e2efe1a469afef7190f0a60958a255b8b4120f00
     
     case "Healing Word":
         target = obj_cursor.hoverNode.occupant;

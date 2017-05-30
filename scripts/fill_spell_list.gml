@@ -10,7 +10,7 @@ class = argument2;
 
 for(i = 0; i <= level; i += 1){
     switch(class){
-        case "Cleric":
+        case "Priest":
             switch(i){
                 case 1:
                     ds_list_add(actor.firstLevelSpellList, "Bless");

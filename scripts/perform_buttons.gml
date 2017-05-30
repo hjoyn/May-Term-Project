@@ -26,6 +26,7 @@ case "END TURN":
     
     break;
     
+<<<<<<< HEAD
     //Cleric spells
     case "BLESS":
         actor.state = "begin action";
@@ -42,6 +43,9 @@ case "END TURN":
         wipe_buttons();
         
         break;
+=======
+    //Priest spells
+>>>>>>> e2efe1a469afef7190f0a60958a255b8b4120f00
     
     case "HEALING WORD":
         actor.state = "begin action";
