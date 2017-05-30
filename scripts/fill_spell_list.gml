@@ -13,8 +13,13 @@ for(i = 0; i <= level; i += 1){
         case "Priest":
             switch(i){
                 case 1:
+<<<<<<< HEAD
+                    //ds_list_add(actor.firstLevelSpellList, "Bless");
+                    ds_list_add(actor.firstLevelSpellList, "Healing Word");
+=======
                     ds_list_add(actor.firstLevelSpellList, "Bless");
                     //ds_list_add(actor.firstLevelSpellList, "Healing Word");
+>>>>>>> 13f14690b1ca051f2ba22defa32e9a9798e1629f
                     //ds_list_add(actor.firstLevelSpellList, "Guiding Bolt");
                     
                     break;
@@ -25,7 +30,7 @@ for(i = 0; i <= level; i += 1){
         case "Wizard":
             switch(i){
                 case 1:
-                    //ds_list_add(actor.firstLevelSpellList, "Magic Missle");
+                    ds_list_add(actor.firstLevelSpellList, "Magic Missle");
                     //ds_list_add(actor.firstLevelSpellList, "Acid Orb");
                     ds_list_add(actor.firstLevelSpellList, "Burning Hands");
                     
