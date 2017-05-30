@@ -13,12 +13,12 @@ switch(targetingType){
         originX = actor.x + 32;
         originY = actor.y + 32;
         dir = point_direction(originX, originY, obj_cursor.hoverNode.x + 32, obj_cursor.hoverNode.y + 32);
-        originX += lengthdir_x(31, dir);
-        originY += lengthdir_y(31, dir);
+        originX += lengthdir_x(63, dir);
+        originY += lengthdir_y(63, dir);
         dist = range - 32;
         
-        for(i = 0; i <= 30; i += 15){
-            for(j = 0; j <= dist; j += 8){
+        for(i = -60; i <= 60; i += 30){
+            for(j = 0; j <= dist; j += 16){
                 tempX = originX + lengthdir_x(j, dir + i);
                 tempY = originY + lengthdir_y(j, dir + i);
                 

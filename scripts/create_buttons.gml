@@ -4,7 +4,7 @@ actor = argument0;
 buttonList = ds_list_create();
 
 if(actor.canAct){
-    //if(actor.firstLevelSlot > 0)
+    if(actor.firstLevelSlot > 0)
     for(i = 0; i < ds_list_size(actor.firstLevelSpellList); i += 1){
         ds_list_add(buttonList, ds_list_find_value(actor.firstLevelSpellList, i));
     } 
