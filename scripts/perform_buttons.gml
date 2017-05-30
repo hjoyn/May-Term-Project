@@ -12,7 +12,7 @@ case "END TURN":
     actor.readiedAction = "END TURN";
     actor.targetingType = "none";
     
-    with(instance_create(room_width/2, room_height, obj_ConfirmButton))
+    with(instance_create(room_width/2, room_height - 128, obj_ConfirmButton))
     {
     title = other.button.title;
     
