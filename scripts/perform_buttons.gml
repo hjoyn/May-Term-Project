@@ -10,7 +10,7 @@ switch(button.title)
 case "END TURN":
     actor.state = "begin action";
     actor.readiedAction = "END TURN";
-    actor.targetingType = "none"
+    actor.targetingType = "none";
     
     with(instance_create(room_width/2, room_height, obj_ConfirmButton))
     {
@@ -25,5 +25,26 @@ case "END TURN":
     wipe_buttons();
     
     break;
+    
+    //Cleric spells
+    
+    
+    //Wizard spells
+    case "BURNING HANDS":
+        actor.state = "begin action";
+        actor.readiedAction = "Burning Hands";
+        actor.targetingType = "cone";
+        actor.actionRange = 96;
+        
+        with(instance_create(room_width/2, room_height, obj_confirmBox)){
+            title = other.button.title;
+            text = other.button.text;
+        }
+        
+        wipe_nodes();
+        wipe_buttons();
+        
+        break;
+
 }
 

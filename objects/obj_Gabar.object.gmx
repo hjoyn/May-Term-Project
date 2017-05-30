@@ -70,6 +70,14 @@ damageType = "piercing";
 baseDmg = profMod + strMod;
 equipDmg = baseDmg + atkMod;
 
+//Spell and action variables
+spellHit = profMod + magMod;
+firstLevelSlotMax = 2;
+firstLevelSlot = 2;
+
+firstLevelSpellList = ds_list_create();
+fill_spell_list(id, level, class);
+
 //Defensive variables
 baseDef = profMod + defMod;
 baseRes = profMod + resMod;

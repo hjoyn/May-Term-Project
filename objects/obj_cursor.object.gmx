@@ -31,12 +31,14 @@ gridY = 0;
 hoverNode = noone;
 
 hoverButton = noone;
+buttonTimer = 0;
 
 selectedActor = noone;
 
-var inst;
+//var inst;
 
-inst = instance_create(0, 0, obj_Selector );
+//inst = 
+instance_create(0, 0, obj_Selector);
 </string>
           </argument>
         </arguments>
@@ -69,16 +71,64 @@ if (gridX &lt; 0 || gridY &lt; 0 || gridX &gt;= room_width/GRID_SIZE || gridY &g
     hoverNode = noone;
 }
 else{
-    hoverNode = map[gridX, gridY];
+    hoverNode = global.map[gridX, gridY]; //added global.
+}
+
+with(obj_ConfirmButton){
+    if(keyboard_check_pressed(vk_enter) || keyboard_check_pressed(ord(hotKey))){
+        other.selectedActor.state = "perform action";
+        instance_destroy();
+    }
 }
 
 if(instance_place(x, y, obj_Button))
 {
+    if(instance_place(x, y, obj_Button)){
+        buttonTimer += 1;
+    }
+    else{
+        buttonTimer = 0;
+    }
+    
     hoverButton = instance_place(x, y, obj_Button);
     hoverNode = noone;
     
-    }else{
+    }
+    else{
     hoverButton = noone;
+    buttonTimer = 0; 
+}
+
+with(obj_Button){
+    if(keyboard_check_pressed(ord(hotKey))){
+        perform_buttons(obj_cursor.selectedActor, id);
+    }
+}
+
+if(keyboard_check_pressed(vk_escape)){
+    if(selectedActor.state == "begin action"){
+        selectedActor.state = "idle";
+        with(obj_ConfirmButton){
+            instance_destroy();
+        }
+        with(obj_confirmBox){
+            instance_destroy();
+        }
+    }
+    wipe_nodes();
+    movement_range(map[selectedActor.gridX, selectedActor.gridY], slectedActor.move, selectedActor.actions);
+    
+    if(selectedActor.canAct){
+        switch(selectedActor.attackType){
+            case "ranged":
+                ranged_attack_range(selectedActor);
+                break;
+            
+            case "melee":
+                melee_attack_range(selectedActor);
+                break;
+        }
+    }
 }
 
 if(mouse_check_button_pressed(mb_left))
@@ -90,7 +140,7 @@ if(mouse_check_button_pressed(mb_left))
     
     if(instance_place(x, y, obj_ConfirmButton))
     {
-    selectedActor.state = "perform action:";
+        selectedActor.state = "perform action";
         with(obj_ConfirmButton)
         {
         instance_destroy();
@@ -213,7 +263,18 @@ if(mouse_check_button_pressed(mb_right)){
                 break;
         }
         
+    }//attack mode block end
+    
+    if(hoverNode.actionNode){
+        selectedActor.state = "perform action";
+        with(obj_confirmBox){
+            instance_destroy();
+        }
+        with(obj_ConfirmButton){
+            instance_destroy();
+        }
     }
+    
     
 }
 </string>
@@ -238,10 +299,35 @@ if(mouse_check_button_pressed(mb_right)){
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>
+            <string>if(hoverNode != noone &amp;&amp; buttonTimer &gt; 15){
+    tempTitle = hoverButton.title;
+    
+    tempText = hoverButton.text;
+    
+    draw_set_font(f_Crit);
+    
+    heightY = string_height(tempText) + string_height(tempText);
+    
+    draw_set_colour(c_black);
+    draw_rectangle(x + 20, y - heightY, x + 20 + string_width(tempTitle), y - heightY + string_height(tempTitle), false);
+    
+    draw_set_colour(c_white);
+    draw_text(x + 20, y - heightY, tempTitle);
+    
+    draw_set_font(f_Default);
+    
+    draw_set_color(c_black);
+    draw_rectangle(x + 20, y - string_height(tempText), x + 20 + string_width(tempText), y, false);
+    
+    draw_set_color(c_white);
+    draw_text(x + 20, y - string_height(tempText), tempText);
+}
+
 
 if(hoverNode != noone){
-    tempText = string(gridX) + " / " + string(gridY) + " = ";
+    //Code to get grid coordinates of hoverNode
+    //tempText = string(gridX) + " / " + string(gridY) + " = ";
+    tempText = "";
     
     if(hoverNode.occupant != noone){
         tempText += hoverNode.occupant.name;
@@ -251,12 +337,13 @@ if(hoverNode != noone){
     }
     
     draw_set_color(c_black);
-    draw_rectangle(0, 0, string_width(tempText), string_height(tempText), false);
+    draw_rectangle(room_width - string_width(tempText), 0, room_width, string_height(tempText), false); //room_width/2 instead of 0
     
     draw_set_color(c_white);
-    draw_text(0, 0, tempText);
+    draw_text(room_width - string_width(tempText), 0, tempText); //room_width/2 instead of 0
     
-    tempText = hoverNode.type;
+   /* Code to display the terrain type and cost
+   tempText = hoverNode.type;
     
     if(hoverNode.passable){
         tempText += " passable = true" + " cost = " + string(hoverNode.cost);
@@ -266,8 +353,8 @@ if(hoverNode != noone){
     draw_rectangle(0, 20, string_width(tempText), string_height(tempText) + 20, false);
     
     draw_set_color(c_white);
-    draw_text(0, 20, tempText);
-    
+    draw_text(0, 20, tempText); 
+   */ 
 }
 
 if(selectedActor != noone){
@@ -278,9 +365,9 @@ if(selectedActor != noone){
     tempHitBonus = "Hit Bonus: " + string(selectedActor.equipDmg);
     
     draw_set_color(c_black);
-    draw_rectangle(0, room_height, string_width(tempHitBonus), room_height - string_height(tempHitBonus), false);
+    draw_rectangle(0, 0, string_width(tempText), string_height(tempText), false);
     draw_rectangle(0, 16, string_width(tempHitPoints), 16 + string_height(tempHitPoints), false);
-    draw_rectangle(0, 32, string_width(tempText), 32 + string_height(tempText), false);
+    draw_rectangle(0, 32, string_width(tempHitBonus), 32 + string_height(tempHitBonus), false);
     
     draw_set_color(c_white);
     draw_text(0, 0, tempText);

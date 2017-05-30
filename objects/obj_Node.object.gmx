@@ -41,7 +41,7 @@ G = 0;
 moveNode = false;
 attackNode = false;
 cost = 1;
-
+actionNode = false;
 
 </string>
           </argument>
