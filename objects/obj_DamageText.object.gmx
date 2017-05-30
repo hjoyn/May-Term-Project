@@ -39,7 +39,7 @@ fade = false;
 
 alpha = 1;
 
-color = c_red;
+
 </string>
           </argument>
         </arguments>
@@ -103,7 +103,7 @@ if(alpha &lt;= 0){
             <kind>1</kind>
             <string>draw_set_font(font);
 
-draw_text_colour(x, y, text, color, color, color, color, alpha);
+draw_text_colour(x, y, text, c_red, c_red, c_red, c_red, alpha);
 
 draw_set_font(f_Default);
 </string>
