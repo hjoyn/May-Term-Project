@@ -62,7 +62,11 @@
     <instance objName="obj_enemy" x="256" y="320" name="inst_125E2A11" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_enemy" x="320" y="320" name="inst_565432C6" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_Gabar" x="448" y="192" name="inst_0CBF692A" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+<<<<<<< HEAD
     <instance objName="obj_Maxine" x="320" y="192" name="inst_66B53B96" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+=======
+    <instance objName="obj_Maxine" x="320" y="128" name="inst_653FA550" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+>>>>>>> 13f14690b1ca051f2ba22defa32e9a9798e1629f
   </instances>
   <tiles/>
   <PhysicsWorld>0</PhysicsWorld>

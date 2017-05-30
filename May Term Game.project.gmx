@@ -30,6 +30,7 @@
       <sprite>sprites\spr_selected</sprite>
       <sprite>sprites\spr_Biff</sprite>
       <sprite>sprites\spr_flame</sprite>
+      <sprite>sprites\spr_bless</sprite>
     </sprites>
   </sprites>
   <backgrounds name="background"/>
@@ -52,6 +53,7 @@
       <script>scripts\perform_action.gml</script>
       <script>scripts\fill_spell_list.gml</script>
       <script>scripts\action_targeting.gml</script>
+      <script>scripts\attack_apply.gml</script>
     </scripts>
   </scripts>
   <fonts name="fonts">
@@ -89,6 +91,7 @@
       <object>objects\obj_DamageText</object>
       <object>objects\obj_flameEmitter</object>
       <object>objects\obj_flame</object>
+      <object>objects\obj_bless</object>
     </objects>
   </objects>
   <rooms name="rooms">
