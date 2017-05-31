@@ -54,6 +54,8 @@
       <script>scripts\fill_spell_list.gml</script>
       <script>scripts\action_targeting.gml</script>
       <script>scripts\attack_apply.gml</script>
+      <script>scripts\hit_chance.gml</script>
+      <script>scripts\effect_initialize.gml</script>
     </scripts>
   </scripts>
   <fonts name="fonts">

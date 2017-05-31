@@ -30,13 +30,13 @@
 randomize();
 
 state = "initializing";
-
+/*
 turnOrder = ds_list_create();
  
 turnCounter = -1;
  
 turnMax =  0;
- 
+ */
 currentActor = noone;
  
 roundCounter = 0;
@@ -165,9 +165,11 @@ case "initializing":
         }
 }
 
-    state = "roll init";
+    //state = "roll init";
+    state = "round init";
+    
     break;
-
+    /*
     case "roll init":
         tempInit = ds_priority_create();
        with(obj_actor){
@@ -185,17 +187,46 @@ case "initializing":
    ds_priority_destroy(tempInit);
     
     state = "ready";
+    
     break;
- 
+    */
+    
+    case "round init":    
+        with(obj_actor){
+            if(army == BLUE_ARMY){
+                actions= 2;
+                canAct = true;
+                actionsDone = false;
+                state = "initalize turn";
+            }
+        }
+        state = "ready";
+        
+        break;
+    
     case "ready":
-       if(currentActor == noone){
+        
+        turnDone = true;
+        with(obj_actor){
+            if(army == BLUE_ARMY){
+                other.turnDone = other.turnDone &amp;&amp; actionsDone;
+            }
+        }
+        if(turnDone){
+            roundCounter += 1; 
+            state = "round init";
+        }
+        
+        /*
+        if(currentActor){
             turnCounter += 1;
-
-          if(turnCounter &gt;= turnMax){
+            
+            if(turnCounter &gt;= turnMax){
                 turnCounter = 0;
                 roundCounter += 1; 
-          }
- 
+                show_debug_message("Inc roundCounter" + string(roundCounter));
+            }
+            
             currentActor = ds_list_find_value(turnOrder, turnCounter);
             
             currentActor.actions= 2;
@@ -203,6 +234,7 @@ case "initializing":
             
             currentActor.state = "initialize turn";
         }
+        */
         break;
 }
 </string>
