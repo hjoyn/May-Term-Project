@@ -268,6 +268,7 @@ switch(state){
                         }
                         
                         attackTarget.hitPoints -= attackDamage;
+                        hitPoints -= 1;
                         
                         with(instance_create(attackTarget.x + 56, attackTarget.y + 4, obj_DamageText)){
                             text = "-" + string(other.attackDamage);
