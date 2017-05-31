@@ -49,7 +49,7 @@ case "END TURN":
         actor.targetingType = "visible allies";
         actor.actionRange = 640;
         
-        with(instance_create(room_width/2, room_height, obj_confirmBox)){
+        with(instance_create(room_width/2, room_height - 128, obj_confirmBox)){
             title = other.button.title;
             text = other.button.text;
         }
@@ -69,6 +69,24 @@ case "END TURN":
         with(instance_create(room_width/2, room_height, obj_confirmBox)){
             title = other.button.title;
             text = other.button.text;
+        }
+        
+        wipe_nodes();
+        wipe_buttons();
+        
+        break;
+        
+      case "MAGIC MISSILES":
+        actor.state = "begin action";
+        actor.readiedAction = "Magic Missiles";
+        actor.targetingType = "visible enemies";
+        actor.actionRange = 640;
+        
+        with(instance_create(room_width/2, room_height, obj_ConfirmButton)){
+            title = other.button.title;
+            text = other.button.text;
+            
+            hotKey = other.button.hotKey;
         }
         
         wipe_nodes();

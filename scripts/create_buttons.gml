@@ -45,7 +45,7 @@ switch(button)
             { 
                 title = "BLESS";
             
-                text = "Give all party members a small bonus to defense and resist#1d4 bonus (5 rounds)";
+                text = "Give all party members a small bonus to defense and resist bonus (5 rounds)";
             
                 hotKey = string(other.i + 1); 
                 
@@ -60,7 +60,7 @@ switch(button)
             { 
                 title = "HEALING WORD";
             
-                text = "Right-click an ally in range to heal them#1d8" + string(other.actor.magMod) + " HEALING";
+                text = "Right-click an ally in range to heal them" + string(other.actor.magMod) + " HEALING";
             
                 hotKey = string(other.i + 1); 
                 
@@ -85,6 +85,22 @@ switch(button)
                 //spellSlot = string(other.actor.firstLevelSlot);
             }
         break;
+        
+        case "Magic Missiles":
+            with(instance_create(buttonX + (i * 96), buttonY, obj_Button))
+            { 
+                title = "MAGIC MISSILES";
+            
+                text = "Fire a magic missile at each visible enemy#Force damage#cannot miss";
+            
+                hotKey = string(other.i + 1); 
+                
+                spell = true;
+                
+                //spellSlot = string(other.actor.firstLevelSlot);
+            }
+        break;
+        
     }
 } 
 ds_list_destroy(buttonList);

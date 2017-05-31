@@ -50,9 +50,9 @@ switch(action)
     case "Healing Word":
         target = obj_cursor.hoverNode.occupant;
         
-        heal = actor.magMod;
+        heal = 4 + actor.magMod;
         
-        heal = min(heal, target.maxHitPoints - target.hitpoints);
+        heal = min(heal, target.maxHitPoints - target.hitPoints);
         
         target.hitPoints += heal;
         
@@ -104,5 +104,42 @@ switch(action)
         actor.actionTimer = 30;
         
         break;
+        
+    case "Magic Missiles":
+        targets = ds_list_create();
+        damage = 5 + actor.magMod;
+        
+        with(obj_Node){
+            if(actionNode){
+                ds_list_add(other.targets, id);
+            }
+        }
+        
+        for(i = 0; i < ds_list_size(targets); i += 1){
+            target = ds_list_find_value(targets, i).occupant;
+            
+            with(instance_create(actor.x + 16, actor.y + 16, obj_Stell)){
+                target = other.target;
+                damage = other.damage;
+                status = "hit";
+                damageType = "force";
+                
+                path_add_point(movementPath, other.actor.x + 16, other.actor.y +16, 100);
+                
+                path_add_point(movementPath, other.target.x + 16, other.target.y + 16, 100);
+                
+                path_start(movementPath, speed, true, true);
+            }
+        }
+        ds_list_destroy(targets);
+        
+        //actor.firstLevelSlot -= 1;
+        actor.canAct = false;
+        actor.actions -= 1;
+        actor.state = "end action";
+        actor.actionTimer = 30;
+        
+        break;
+        
         
 }

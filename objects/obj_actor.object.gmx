@@ -327,6 +327,7 @@ switch(state){
     case "begin action":
         wipe_nodes();
         action_targeting(id, targetingType, actionRange);
+        
         break;
         
     case "perform action":
