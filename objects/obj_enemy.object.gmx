@@ -32,6 +32,55 @@ army = RED_ARMY;
 flash = false;
 
 color = c_white;
+
+//Character statistics
+
+level = 1;
+
+//Base statistics
+profMod = 2 + floor(level/5);
+
+conMod = 0;
+defMod = 0;
+resMod = 0;
+dexMod = 0;
+strMod = 10;
+magMod = 0;
+
+//Equipment variables
+atkMod = 0;
+spellMod = 0;
+armorMod = 0;
+resistMod = 0;
+
+//Health variables
+maxHitPoints = 4 + conMod + (level - 1) * (3 + conMod);
+hitPoints = maxHitPoints;
+
+//Attack variables
+attackType = "melee";
+attackTarget = noone;
+attackTimer = 0;
+critChance = 20;
+critMod = 1.5;
+
+//Damage variables
+damageType = "piercing";
+baseDmg = profMod + strMod;
+equipDmg = baseDmg + atkMod;
+
+//Defensive variables
+baseDef = profMod + defMod;
+baseRes = profMod + resMod;
+
+//Movement and action variables
+move = 4;
+actions = 2;
+
+
+//Initiative
+//initiative = dexMod;
+//initRoll = 0;
 </string>
           </argument>
         </arguments>

@@ -79,8 +79,8 @@ actions = 2;
 
 
 //Initiative
-initiative = dexMod;
-initRoll = 0;
+//initiative = dexMod;
+//initRoll = 0;
 
 //variables related to buttons
 defaultActions = ds_list_create();

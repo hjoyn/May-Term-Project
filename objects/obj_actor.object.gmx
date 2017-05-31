@@ -143,6 +143,17 @@ shakeMag = 0;
             <kind>1</kind>
             <string>shake -= 1;
 
+if(hitPoints &lt;= 0){
+    map[gridX, gridY].occupant = noone;
+    //Possibly don't need if statement below ans its arguments
+    //Might want to keep it for enemy units
+    if(obj_control.currentActor = id){ 
+        obj_control.currentActor = noone;
+        obj_cursor.selectedActor = noone;
+    }
+    instance_destroy();
+}
+
 switch(state){
     
     case "initialize turn":

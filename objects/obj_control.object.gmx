@@ -194,7 +194,7 @@ case "initializing":
     case "round init":    
         with(obj_actor){
             if(army == BLUE_ARMY){
-                actions= 2;
+                actions = 2;
                 canAct = true;
             }
             state = "initialize turn";
