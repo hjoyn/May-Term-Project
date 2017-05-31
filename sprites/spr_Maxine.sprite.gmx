@@ -8,8 +8,8 @@
   <sepmasks>0</sepmasks>
   <bboxmode>0</bboxmode>
   <bbox_left>12</bbox_left>
-  <bbox_right>52</bbox_right>
-  <bbox_top>16</bbox_top>
+  <bbox_right>54</bbox_right>
+  <bbox_top>6</bbox_top>
   <bbox_bottom>57</bbox_bottom>
   <HTile>0</HTile>
   <VTile>0</VTile>
@@ -21,5 +21,22 @@
   <height>64</height>
   <frames>
     <frame index="0">images\spr_Maxine_0.png</frame>
+    <frame index="1">images\spr_Maxine_1.png</frame>
+    <frame index="2">images\spr_Maxine_2.png</frame>
+    <frame index="3">images\spr_Maxine_3.png</frame>
+    <frame index="4">images\spr_Maxine_4.png</frame>
+    <frame index="5">images\spr_Maxine_5.png</frame>
+    <frame index="6">images\spr_Maxine_6.png</frame>
+    <frame index="7">images\spr_Maxine_7.png</frame>
+    <frame index="8">images\spr_Maxine_8.png</frame>
+    <frame index="9">images\spr_Maxine_9.png</frame>
+    <frame index="10">images\spr_Maxine_10.png</frame>
+    <frame index="11">images\spr_Maxine_11.png</frame>
+    <frame index="12">images\spr_Maxine_12.png</frame>
+    <frame index="13">images\spr_Maxine_13.png</frame>
+    <frame index="14">images\spr_Maxine_14.png</frame>
+    <frame index="15">images\spr_Maxine_15.png</frame>
+    <frame index="16">images\spr_Maxine_16.png</frame>
+    <frame index="17">images\spr_Maxine_17.png</frame>
   </frames>
 </sprite>

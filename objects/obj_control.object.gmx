@@ -154,6 +154,20 @@ case "initializing":
                 cost = 2;
             
                 break;
+                
+                case "grass":
+                instance_change(obj_grass, true);
+                type = "grass";
+                cost = 1;
+            
+                break;
+                
+                case "stone":
+                instance_change(obj_stoneFloor, true);
+                type = "stone";
+                cost = 1;
+            
+                break;
     
             }
     
