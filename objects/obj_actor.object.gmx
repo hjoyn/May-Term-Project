@@ -85,8 +85,9 @@ canAct = false;
 
 
 //initiative variables
-initiative = dexMod;
-initRoll = 0;
+//initiative = dexMod;
+//initRoll = 0;
+actionsDone = false;
 
 //variables related to buttons
 defaultActions = ds_list_create();
@@ -145,37 +146,34 @@ shakeMag = 0;
 switch(state){
     
     case "initialize turn":
-        if(bless &gt; obj_control.roundCounter){
-        show_debug_message(string(bless));
-            with(instance_create(x, y, obj_bless)){
-                target = other;
-            }
-        }
-        else{
-        show_debug_message(string(bless));
-            bless = 0;
+        effect_initialize(id);
+        
+        if(army != BLUE_ARMY){
+            flash = true;
+            alarm[0] = 20;
         }
         
+        break;
+        
+    case "selection":
         if(army == BLUE_ARMY){
             movement_range(map[gridX, gridY], move, actions);
             
-            switch(attackType){
-                case "melee":
-                    melee_attack_range(id);
+            if(actions &gt; 0){
+                switch(attackType){
+                    case "melee":
+                        melee_attack_range(id);
+                        
+                        break;
                     
-                    break;
-                
-                case "ranged":
-                    ranged_attack_range(id);
-                    
-                    break;
+                    case "ranged":
+                        ranged_attack_range(id);
+                        
+                        break;
+                }
             }
             
-            obj_cursor.selectedActor = id;
-        }
-        else{
-            flash = true;
-            alarm[0] = 20;
+            //obj_cursor.selectedActor = id;
         }
         
         state = "ready";
@@ -199,32 +197,10 @@ switch(state){
         break;
     
     case "attack":
-        hitMod = 1.25;
-        critRoll = irandom_range(1, critChance);
-        if(critRoll = 1){
-            attackStatus = "crit";
-        }
-        hitChance = max(95, 70 + (dexMod - attackTarget.dexMod) * hitMod);
-        if(random_range(1, 100) &lt;= hitChance){
-            attackStatus = "hit";
-        }
-        else{
-            attackStatus = "miss";
-        }
+        
+        attackStatus = hit_chance(id, attackTarget);
         
         attackDamage = attack_apply(id, attackTarget);
-        
-        if(attackStatus = "crit"){
-            attackDamage *= 1.5;
-        }
-                
-        if(attackStatus == "crit"){
-            attackTarget.shake = 8;
-            attackTarget.shakeMag = 8;
-        }else{
-            attackTarget.shake = 4;
-            attackTarget.shakeMag = 4;
-        }
         
         switch(attackType){
             case "ranged":
@@ -262,7 +238,7 @@ switch(state){
                 case "melee":
                     if(attackStatus != "miss"){
                         for(ii = 0; ii &lt; 6; ii += 1){
-                            with(instance_create(attackTarget.x + 16, attackTarget.y + 16, obj_Biff)){
+                            with(instance_create(attackTarget.x + 32, attackTarget.y + 32, obj_Biff)){
                                 direction = irandom(360);
                                 speed = choose(2, 4);
                                 scale = choose(2, 3);
@@ -279,7 +255,7 @@ switch(state){
                         
                         attackTarget.hitPoints -= attackDamage;
                         
-                        with(instance_create(attackTarget.x + 28, attackTarget.y + 2, obj_DamageText)){
+                        with(instance_create(attackTarget.x + 56, attackTarget.y + 4, obj_DamageText)){
                             text = "-" + string(other.attackDamage);
                             
                             ground = y;
@@ -291,7 +267,7 @@ switch(state){
                         }
                         
                     }else{
-                        with(instance_create(attackTarget.x +28, attackTarget.y +2,obj_DamageText)){
+                        with(instance_create(attackTarget.x + 56, attackTarget.y +4,obj_DamageText)){
                             text = "miss"
                             
                             ground = y;
@@ -308,20 +284,21 @@ switch(state){
         break; 
     
     case "end attack":
-            actionTimer -=1;
-            
-            if(actionTimer &lt;= 0){
-                if(actions &gt; 0){
-                    obj_cursor.selectedActor = id;
-                    
-                    movement_range(map[gridX, gridY], move, actions);
-                }
-                else{
-                    obj_control.currentActor = noone;
-                }
+        actionTimer -=1;
+        
+        if(actionTimer &lt;= 0){
+            if(actions &gt; 0){
+                obj_cursor.selectedActor = id;
                 
-                state = "idle";
+                movement_range(map[gridX, gridY], move, actions);
             }
+            else{
+                actionsDone = true;
+                obj_control.currentActor = noone;
+            }
+            
+            state = "idle";
+        }
         break; 
         
     case "begin action":
@@ -340,26 +317,24 @@ switch(state){
     case "end action":
         actionTimer -= 1;
         
-        if(actionTimer&lt;=0)
-        {
-        state = "idle";
+        if(actionTimer&lt;=0){
+            state = "idle";
         }
-        if(actions &gt; 0)
-        {
-         movement_range(map[gridX, gridY], move, actions);
+        if(actions &gt; 0){
+            movement_range(map[gridX, gridY], move, actions);
         }
-        else
-        {
-        state = "idle";
-        obj_cursor.selectedActor = noone;
-        obj_control.currentActor = noone;
+        else{
+            actionsDone = true;
+            state = "idle";
+            obj_cursor.selectedActor = noone;
+            obj_control.currentActor = noone;
         }
         break;
     
     case "end turn":
         actionTimer=-1;
-        if(actionTimer &lt;=0)
-        {
+        if(actionTimer &lt;=0){
+            actionsDone = true;
             obj_cursor.selectedActor = noone;
             obj_control.currentActor = noone;
             state = "idle";
@@ -411,6 +386,7 @@ if(endPath == "ready"){
         }
         
     }else{
+        actionsDone = true;
         obj_control.currentActor = noone;
     }
 }else{

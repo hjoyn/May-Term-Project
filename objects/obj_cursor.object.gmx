@@ -81,8 +81,7 @@ with(obj_ConfirmButton){
     }
 }
 
-if(instance_place(x, y, obj_Button))
-{
+if(instance_place(x, y, obj_Button)){
     if(instance_place(x, y, obj_Button)){
         buttonTimer += 1;
     }
@@ -93,8 +92,8 @@ if(instance_place(x, y, obj_Button))
     hoverButton = instance_place(x, y, obj_Button);
     hoverNode = noone;
     
-    }
-    else{
+}
+else{
     hoverButton = noone;
     buttonTimer = 0; 
 }
@@ -131,21 +130,27 @@ if(keyboard_check_pressed(vk_escape)){
     }
 }
 
-if(mouse_check_button_pressed(mb_left))
-{
-    if(selectedActor != noone &amp;&amp; hoverButton != noone)
-    {
-        perform_buttons(selectedActor, hoverButton);
-    }
-    
-    if(instance_place(x, y, obj_ConfirmButton))
-    {
-        selectedActor.state = "perform action";
-        with(obj_ConfirmButton)
-        {
-        instance_destroy();
+if(mouse_check_button_pressed(mb_left)){
+    if(selectedActor){
+        if(hoverButton){
+            perform_buttons(selectedActor, hoverButton);
+        }
+        else{
+            if(instance_place(x, y, obj_ConfirmButton)){
+                selectedActor.state = "perform action";
+                with(obj_ConfirmButton){
+                    instance_destroy();
+                }
+            }
         }
     }
+    if(hoverNode.occupant &amp;&amp; hoverNode.occupant.army == BLUE_ARMY &amp;&amp; hoverNode.occupant.state != "moving"){
+        selectedActor = hoverNode.occupant;
+        currentActor = hoverNode.occupant;
+        show_debug_message("Selection made");
+        currentActor.state = "selection";
+    }
+    
 }
 
 if(mouse_check_button_pressed(mb_right)){
@@ -187,7 +192,7 @@ if(mouse_check_button_pressed(mb_right)){
         selectedActor = noone;
     }
     
-    if(selectedActor != noone &amp;&amp; hoverNode.attackNode){
+    if(selectedActor != noone &amp;&amp; hoverNode.attackNode &amp;&amp; selectedActor.actions &gt; 0){
         switch(selectedActor.attackType){
             case "ranged":
                 selectedActor.canAct = false;
@@ -370,11 +375,14 @@ if(selectedActor != noone){
     draw_rectangle(0, 16, string_width(tempHitPoints), 16 + string_height(tempHitPoints), false);
     draw_rectangle(0, 32, string_width(tempHitBonus), 32 + string_height(tempHitBonus), false);
     
-    draw_set_color(c_white);
+    draw_set_color(c_red);
     draw_text(0, 0, tempText);
     draw_text(0, 16, tempHitPoints);
     draw_text(0, 32, tempHitBonus);
-    draw_text(0, 32, selectedActor.bless);
+    draw_text(0, 64, selectedActor.actions);
+    draw_text(0, 128, selectedActor.actionsDone);
+    draw_text(0, 192, string(true));
+    draw_text(0, 256, string(false));
 }
 
 

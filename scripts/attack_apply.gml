@@ -9,7 +9,7 @@ actorAtkMod = 0;
 
 targetDefMod = 0;
 
-if(target.bless > 0){
+if(actor.bless > 0){
     actorAtkMod += 3;
 }
 
