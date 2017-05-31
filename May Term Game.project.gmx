@@ -20,10 +20,14 @@
     <sprites name="Actors">
       <sprite>sprites\spr_Stell</sprite>
       <sprite>sprites\spr_Gabar</sprite>
-      <sprite>sprites\spr_enemy</sprite>
+      <sprite>sprites\spr_basicKnight</sprite>
       <sprite>sprites\spr_Maxine</sprite>
       <sprite>sprites\spr_Wetram</sprite>
       <sprite>sprites\spr_Cibenus</sprite>
+      <sprite>sprites\spr_Jensen</sprite>
+      <sprite>sprites\spr_Dacil</sprite>
+      <sprite>sprites\spr_eagleKnight</sprite>
+      <sprite>sprites\spr_boss1</sprite>
     </sprites>
     <sprites name="Effects">
       <sprite>sprites\spr_Arow</sprite>
@@ -71,11 +75,16 @@
     <object>objects\obj_Node</object>
     <objects name="Actors">
       <object>objects\obj_Stell</object>
+      <object>objects\obj_Dacil</object>
       <object>objects\obj_Gabar</object>
       <object>objects\obj_Maxine</object>
       <object>objects\obj_Cibenus</object>
+      <object>objects\obj_Jensen</object>
       <object>objects\obj_Wetram</object>
       <object>objects\obj_enemy</object>
+      <object>objects\obj_basicKnight</object>
+      <object>objects\obj_eagleKnight</object>
+      <object>objects\obj_boss1</object>
     </objects>
     <objects name="Nodes and Terrain">
       <object>objects\obj_wall</object>
