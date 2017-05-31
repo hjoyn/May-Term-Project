@@ -281,6 +281,17 @@ switch(state){
                             
                         }
                         
+                        with(instance_create(x + 56, y + 4, obj_DamageText)){
+                            text = "-" + string(1);
+                            
+                            ground = y;
+                            
+                            if(other.attackStatus == "crit"){
+                                font = f_Crit; 
+                            }
+                            
+                        }
+                        
                     }else{
                         with(instance_create(attackTarget.x + 56, attackTarget.y +4,obj_DamageText)){
                             text = "miss"
