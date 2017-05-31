@@ -379,10 +379,10 @@ if(selectedActor != noone){
     draw_text(0, 0, tempText);
     draw_text(0, 16, tempHitPoints);
     draw_text(0, 32, tempHitBonus);
-    draw_text(0, 64, selectedActor.actions);
-    draw_text(0, 128, selectedActor.actionsDone);
-    draw_text(0, 192, obj_control.roundDoneBlue);
-    draw_text(0, 256, obj_control.roundDoneRed);
+    //draw_text(0, 64, selectedActor.actions);
+    //draw_text(0, 128, selectedActor.actionsDone);
+    //draw_text(0, 192, obj_control.roundDoneBlue);
+    //draw_text(0, 256, obj_control.roundDoneRed);
 }
 
 

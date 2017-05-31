@@ -268,9 +268,21 @@ switch(state){
                         }
                         
                         attackTarget.hitPoints -= attackDamage;
+                        hitPoints -= 1;
                         
                         with(instance_create(attackTarget.x + 56, attackTarget.y + 4, obj_DamageText)){
                             text = "-" + string(other.attackDamage);
+                            
+                            ground = y;
+                            
+                            if(other.attackStatus == "crit"){
+                                font = f_Crit; 
+                            }
+                            
+                        }
+                        
+                        with(instance_create(x + 56, y + 4, obj_DamageText)){
+                            text = "-" + string(1);
                             
                             ground = y;
                             
