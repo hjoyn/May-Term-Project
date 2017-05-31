@@ -15,14 +15,17 @@ switch(action)
         
     //Priest spells
     case "Bless":
+        show_debug_message("Bless: cast");
         targets = ds_list_create();
         
         with(obj_Node){
-            if(actionNode){
+            if(id.occupant && id.occupant.army = BLUE_ARMY){
                 ds_list_add(other.targets, id);
+        show_debug_message("Bless: add");
             }
         }
         
+        show_debug_message("Bless: cast1");
         for(i = 0; i < ds_list_size(targets); i+= 1){
             target = ds_list_find_value(targets, i).occupant;
             

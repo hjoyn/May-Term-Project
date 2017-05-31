@@ -321,6 +321,7 @@ if(mouse_check_button_pressed(mb_right)){
     
     draw_set_color(c_white);
     draw_text(x + 20, y - string_height(tempText), tempText);
+    
 }
 
 
@@ -373,8 +374,10 @@ if(selectedActor != noone){
     draw_text(0, 0, tempText);
     draw_text(0, 16, tempHitPoints);
     draw_text(0, 32, tempHitBonus);
+    draw_text(0, 32, selectedActor.bless);
 }
-    
+
+
 </string>
           </argument>
         </arguments>

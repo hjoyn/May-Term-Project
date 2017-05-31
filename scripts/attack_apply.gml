@@ -10,7 +10,6 @@ actorAtkMod = 0;
 targetDefMod = 0;
 
 if(target.bless > 0){
-    targetDefMod += 3;
     actorAtkMod += 3;
 }
 

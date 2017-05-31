@@ -2,7 +2,6 @@
 
 actor = argument0;
 buttonList = ds_list_create();
-show_debug_message("Actor: " + object_get_name(actor));
 defAct = actor.defaultActions;
 
 

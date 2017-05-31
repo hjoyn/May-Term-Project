@@ -146,11 +146,13 @@ switch(state){
     
     case "initialize turn":
         if(bless &gt; obj_control.roundCounter){
-            with(instance_create(x, y, obj.bless)){
+        show_debug_message(string(bless));
+            with(instance_create(x, y, obj_bless)){
                 target = other;
             }
         }
         else{
+        show_debug_message(string(bless));
             bless = 0;
         }
         
