@@ -118,7 +118,7 @@ switch(action)
         for(i = 0; i < ds_list_size(targets); i += 1){
             target = ds_list_find_value(targets, i).occupant;
             
-            with(instance_create(actor.x + 16, actor.y + 16, obj_Stell)){
+            with(instance_create(actor.x + 16, actor.y + 16, obj_Arrow)){
                 target = other.target;
                 damage = other.damage;
                 status = "hit";

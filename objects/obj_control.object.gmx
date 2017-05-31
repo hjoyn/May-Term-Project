@@ -163,7 +163,7 @@ case "initializing":
         occupant.gridX = gridX;
         occupant.gridY = gridY;
         }
-}
+    }
 
     //state = "roll init";
     state = "round init";
@@ -196,9 +196,8 @@ case "initializing":
             if(army == BLUE_ARMY){
                 actions= 2;
                 canAct = true;
-                actionsDone = false;
-                state = "initalize turn";
             }
+            state = "initialize turn";
         }
         state = "ready";
         
@@ -206,13 +205,11 @@ case "initializing":
     
     case "ready":
         
-        turnDone = true;
+        roundDone = true;
         with(obj_actor){
-            if(army == BLUE_ARMY){
-                other.turnDone = other.turnDone &amp;&amp; actionsDone;
-            }
+            other.roundDone = other.roundDone &amp;&amp; actionsDone;
         }
-        if(turnDone){
+        if(roundDone){
             roundCounter += 1; 
             state = "round init";
         }

@@ -146,9 +146,11 @@ shakeMag = 0;
 switch(state){
     
     case "initialize turn":
+        actionsDone = false;
         effect_initialize(id);
-        
+        show_debug_message("turn init");
         if(army != BLUE_ARMY){
+        show_debug_message("red turn init");
             flash = true;
             alarm[0] = 20;
         }
