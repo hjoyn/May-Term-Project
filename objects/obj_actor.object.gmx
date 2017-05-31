@@ -165,6 +165,7 @@ switch(state){
             flash = true;
             alarm[0] = 20;
         }
+        state = "idle";
         
         break;
         
@@ -345,8 +346,8 @@ switch(state){
         break;
     
     case "end turn":
-        actionTimer=-1;
-        if(actionTimer &lt;=0){
+        actionTimer = -1;
+        if(actionTimer &lt;= 0){
             actionsDone = true;
             obj_cursor.selectedActor = noone;
             obj_control.currentActor = noone;

@@ -38,6 +38,10 @@ turnCounter = -1;
 turnMax =  0;
  */
 currentActor = noone;
+
+roundDoneBlue= false;
+
+roundDoneRed = false;
  
 roundCounter = 0;
 
@@ -166,7 +170,7 @@ case "initializing":
     }
 
     //state = "roll init";
-    state = "round init";
+    state = "round init blue";
     
     break;
     /*
@@ -191,13 +195,27 @@ case "initializing":
     break;
     */
     
-    case "round init":    
+    case "round init blue":    
         with(obj_actor){
             if(army == BLUE_ARMY){
+                show_debug_message("actor init blue");
                 actions = 2;
                 canAct = true;
+                state = "initialize turn";
             }
-            state = "initialize turn";
+        }
+        state = "ready";
+        
+        break;
+        
+    case "round init red":    
+        with(obj_actor){
+            if(army == RED_ARMY){
+                show_debug_message("actor init red");
+                actions = 2;
+                canAct = true;
+                state = "initialize turn";
+            }
         }
         state = "ready";
         
@@ -205,14 +223,33 @@ case "initializing":
     
     case "ready":
         
-        roundDone = true;
+        show_debug_message("ready" + string(true &amp;&amp; false));
+        roundDoneBlue = true;
         with(obj_actor){
-            other.roundDone = other.roundDone &amp;&amp; actionsDone;
+            if(army == BLUE_ARMY){
+                show_debug_message(string(other.roundDoneBlue) + "scan blue"+ string(actionsDone));
+                other.roundDoneBlue = other.roundDoneBlue &amp;&amp; actionsDone;
+            }
         }
-        if(roundDone){
-            roundCounter += 1; 
-            state = "round init";
+        if(roundDoneBlue){
+            show_debug_message("blue init");
+            state = "round init blue";
+            
+            roundDoneRed = true;
+            with(obj_actor){
+                if(army == RED_ARMY){
+                    other.roundDoneRed = other.roundDoneRed &amp;&amp; actionsDone;
+                }
+            }
+            if(roundDoneRed){
+            show_debug_message("red init");
+                roundCounter += 1; 
+                state = "round init red";
+            }
         }
+        
+        
+        
         
         /*
         if(currentActor){

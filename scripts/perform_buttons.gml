@@ -9,7 +9,7 @@ switch(button.title)
 {
 case "END TURN":
     actor.state = "begin action";
-    actor.readiedAction = "END TURN";
+    actor.readiedAction = "End Turn";
     actor.targetingType = "none";
     
     with(instance_create(room_width/2, room_height - 128, obj_ConfirmButton))

@@ -81,6 +81,7 @@ actions = 2;
 //Initiative
 //initiative = dexMod;
 //initRoll = 0;
+actionsDone = true;
 </string>
           </argument>
         </arguments>
@@ -108,6 +109,8 @@ actions = 2;
 color = c_white;
 
 obj_control.currentActor = noone;
+
+
 </string>
           </argument>
         </arguments>
@@ -133,14 +136,13 @@ obj_control.currentActor = noone;
             <string>if(flash){
     color = choose(c_white, c_yellow, c_orange);
 }
-
 if(shake &gt; 0){
     draw_sprite_ext(sprite_index, -1, x + irandom_range(-shakeMag, shakeMag), y + irandom_range(-shakeMag, shakeMag), 1, 1, 0, color, 1);
 }
 else{
     draw_sprite_ext(sprite_index, -1, x, y, 1, 1, 0, color, 1);
-}
 
+}
 </string>
           </argument>
         </arguments>
