@@ -93,6 +93,14 @@ path_set_kind(movementPath, 2);
         }
     }
     
+    with(instance_create(owner.x + 56, owner.y + 4, obj_DamageText)){
+                            text = "-" + string(1);
+                            
+                            ground = y;
+                            
+                            
+                        }
+    
     if(status == "crit"){
         target.shake = 8;
         target.shakeMag = 8;
