@@ -28,11 +28,6 @@
             <string>event_inherited();
 
 name = "Invader";
-
-conMod = 100;
-level = 2;
-maxHitPoints = 4 + conMod + (level - 1) * (3 + conMod);
-hitPoints = maxHitPoints;
 </string>
           </argument>
         </arguments>

@@ -225,6 +225,7 @@ switch(state){
                 beginY = y + 32 + lengthdir_y(30, attackDir);
                 
                 with(instance_create(beginX, beginY, obj_Arrow)){
+                    owner = other;
                     target = other.attackTarget;
                     status = other.attackStatus;
                     damage = other.attackDamage;

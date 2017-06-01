@@ -66,6 +66,7 @@ path_set_kind(movementPath, 2);
           <argument>
             <kind>1</kind>
             <string>if(status != "miss"){
+    owner.hitPoints -= 1;
     target.hitPoints -= damage;
     
     for(ii = 0; ii &lt; 6; ii += 1){
