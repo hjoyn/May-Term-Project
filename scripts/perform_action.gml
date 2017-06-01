@@ -123,6 +123,7 @@ switch(action)
                 damage = other.damage;
                 status = "hit";
                 damageType = "force";
+                owner = actor;
                 
                 path_add_point(movementPath, other.actor.x + 16, other.actor.y +16, 100);
                 
